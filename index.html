@@ -87,7 +87,7 @@
 
     .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
     }
 
@@ -173,6 +173,13 @@
       color: #bbbbbb;
     }
 
+    @media (max-width: 768px) {
+      .projects {
+        grid-template-columns: 1fr; /* по одному проекту в ряд */
+      }
+    }
+
+
     footer {
       text-align: center;
       padding: 2rem;
@@ -213,7 +220,7 @@
 
         <div class="project-card">
           <h3>so_long</h3>
-          <p>A 2D game project at Ecole 42. The goal was to implement a small top-down game using a custom graphics library (MiniLibX). The game features map parsing, player movement, collectibles, enemies, and a winning condition. It focuses on event handling, memory management, and mastering the basics of game development with C.</p>
+        <p>A 2D game project at Ecole 42. The goal was to implement a small top-down game using a custom graphics library (MiniLibX). The game features map parsing, player movement, collectibles, enemies, and a winning condition. It focuses on event handling, memory management, and mastering the basics of game development with C.</p>
           <div class="tech-tags">
             <span class="tag">C</span>
             <span class="tag">MiniLibX</span>
