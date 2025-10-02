@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yevhen Yaniv - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #e0d4ff;
+            background: #0a0a0f;
+        }
+
+        header {
+            background: linear-gradient(135deg, #6b2fb5 0%, #9d4edd 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(157, 78, 221, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #c77dff;
+            border-bottom: 2px solid #2a1a4d;
+            padding-bottom: 0.5rem;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: #16131d;
+            border: 1px solid #3d2a5f;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: #9d4edd;
+            box-shadow: 0 8px 25px rgba(157, 78, 221, 0.2);
+        }
+
+        .project-card h3 {
+            color: #c77dff;
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        .project-card p {
+            margin-bottom: 1rem;
+            color: #b8a8d4;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, #6b2fb5 0%, #8b3fc7 100%);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill {
+            background: #16131d;
+            border: 1px solid #3d2a5f;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .skill:hover {
+            border-color: #9d4edd;
+            background: #1f1829;
+        }
+
+        .contact {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact a {
+            color: #c77dff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .contact a:hover {
+            color: #e0aaff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #16131d;
+            border-top: 1px solid #3d2a5f;
+            margin-top: 3rem;
+        }
+
+        .about p {
+            font-size: 1.05rem;
+            color: #b8a8d4;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Yevhen Yaniv</h1>
+        <p>Student at School 42 | C/C++ Developer</p>
+    </header>
+
+    <div class="container">
+        <section class="section about">
+            <h2>About Me</h2>
+            <p>Hi! I'm a student at School 42, where I study system programming and C/C++ development. I love diving into low-level programming aspects, working with Linux, and solving complex technical challenges. I'm constantly learning new technologies and improving my skills, striving to become better in my field every day.</p>
+        </section>
+
+        <section class="section">
+            <h2>Projects</h2>
+            <div class="projects">
+                <div class="project-card">
+                    <h3>minishell</h3>
+                    <p>A mini shell inside the terminal - School 42 project. Implementation of a custom shell with support for commands, pipes, redirects, and environment variables. Deep dive into Linux system-level interactions, working with processes and file descriptors.</p>
+                    <div class="tech-tags">
+                        <span class="tag">C</span>
+                        <span class="tag">Linux</span>
+                        <span class="tag">System Programming</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>cub3D</h3>
+                    <p>A 2.5D game based on raycasting in the style of Wolfenstein 3D - School 42 project. Implementation of a graphics engine from scratch, working with complex mathematical formulas and rendering principles. Extensive work on the map and texture parsing system.</p>
+                    <div class="tech-tags">
+                        <span class="tag">C</span>
+                        <span class="tag">Raycasting</span>
+                        <span class="tag">Graphics</span>
+                        <span class="tag">Math</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Skills</h2>
+            <div class="skills">
+                <span class="skill">C</span>
+                <span class="skill">C++</span>
+                <span class="skill">Python</span>
+                <span class="skill">Linux</span>
+                <span class="skill">Git</span>
+                <span class="skill">System Programming</span>
+                <span class="skill">Algorithms</span>
+                <span class="skill">Shell Scripting</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Contact</h2>
+            <div class="contact">
+                <a href="https://github.com/pavshiyqqe" target="_blank">GitHub</a>
+                <a href="mailto:evgenyaniv8@gmail.com">Email</a>
+                <a href="https://discord.com/users/pavshiyjke" target="_blank">Discord: @pavshiyjke</a>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Yevhen Yaniv "pavshiy"
