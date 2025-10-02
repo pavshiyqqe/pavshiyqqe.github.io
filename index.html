@@ -16,6 +16,29 @@
             line-height: 1.6;
             color: #e0d4ff;
             background: #0a0a0f;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(10, 10, 15, 0.7) 0%, rgba(10, 10, 15, 0.85) 100%);
+            z-index: -1;
         }
 
         header {
@@ -153,13 +176,13 @@
 <body>
     <header>
         <h1>Yevhen Yaniv</h1>
-        <p>Student at Ecole 42 | C/C++ Developer</p>
+        <p>Student at School 42 | C/C++ Developer</p>
     </header>
 
     <div class="container">
         <section class="section about">
             <h2>About Me</h2>
-            <p>Hi! I'm a student at Ecole 42, where I study system programming and C/C++ development. I love diving into low-level programming aspects, working with Linux, and solving complex technical challenges. I'm constantly learning new technologies and improving my skills, striving to become better in my field every day.</p>
+            <p>Hi! I'm a student at School 42, where I study system programming and C/C++ development. I love diving into low-level programming aspects, working with Linux, and solving complex technical challenges. I'm constantly learning new technologies and improving my skills, striving to become better in my field every day.</p>
         </section>
 
         <section class="section">
@@ -167,7 +190,7 @@
             <div class="projects">
                 <div class="project-card">
                     <h3>minishell</h3>
-                    <p>A mini shell inside the terminal - Ecole 42 project. Implementation of a custom shell with support for commands, pipes, redirects, and environment variables. Deep dive into Linux system-level interactions, working with processes and file descriptors.</p>
+                    <p>A mini shell inside the terminal - School 42 project. Implementation of a custom shell with support for commands, pipes, redirects, and environment variables. Deep dive into Linux system-level interactions, working with processes and file descriptors.</p>
                     <div class="tech-tags">
                         <span class="tag">C</span>
                         <span class="tag">Linux</span>
@@ -213,4 +236,4 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 Yevhen Yaniv "pavshiy"
+        <p>&copy; 2025 Yev
