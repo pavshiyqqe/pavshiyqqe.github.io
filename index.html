@@ -83,8 +83,33 @@
     .section {
       margin-bottom: 4rem;
     }
+    
+    /* Новий стиль заголовків секцій для проєктів */
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
 
-    .section h2 {
+    .section-header h2 {
+      font-size: 1.8rem;
+      color: #ffffff;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .section-divider {
+      flex-grow: 1;
+      height: 2px;
+      background: linear-gradient(to right, rgba(255,255,255,0.15), transparent);
+      margin-left: 1.5rem;
+      border-radius: 2px;
+    }
+
+    /* Старий стиль для звичайних секцій */
+    .section > h2:not(.section-header h2) {
       font-size: 1.8rem;
       margin-bottom: 1.5rem;
       color: #ffffff;
@@ -130,8 +155,24 @@
       font-size: 1.4rem;
       font-weight: 600;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
+      gap: 1rem;
+    }
+    
+    /* Стильний тег команди */
+    .team-badge {
+      background: rgba(255, 170, 0, 0.12);
+      border: 1px solid rgba(255, 170, 0, 0.4);
+      color: #ffaa00;
+      padding: 0.25rem 0.6rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-left: auto; /* Відштовхує тег максимально вправо */
+      box-shadow: 0 0 10px rgba(255, 170, 0, 0.05);
     }
 
     .project-card p {
@@ -266,22 +307,13 @@
       </p>
     </section>
 
+    <!-- PERSONAL PROJECTS -->
     <section class="section">
-      <h2>Experience & Projects</h2>
+      <div class="section-header">
+        <h2>Personal Projects</h2>
+        <div class="section-divider"></div>
+      </div>
       <div class="projects">
-
-        <div class="project-card">
-          <h3>GameVault</h3>
-          <p>A full-stack web platform featuring a server-authoritative real-time Pong engine. Handled concurrent user sessions, live state synchronization via WebSockets, persistent player stats, and secure JWT/bcrypt authentication flows. Completely containerized for robust deployment.</p>
-          <div class="tech-tags">
-            <span class="tag">Go / Gin</span>
-            <span class="tag">React</span>
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">WebSockets</span>
-            <span class="tag">Docker</span>
-          </div>
-        </div>
-
         <div class="project-card">
           <h3>RAG Telegram Bot</h3>
           <p>An automated AI assistant that ingests PDF/TXT documents, chunks content, generates vector embeddings, and leverages a Retrieval-Augmented Generation (RAG) pipeline to accurately answer user queries based on the provided context.</p>
@@ -290,6 +322,37 @@
             <span class="tag">Groq LLM API</span>
             <span class="tag">Telegram API</span>
             <span class="tag">Vector Embeddings</span>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <h3>Extended Explosives</h3>
+          <p>Independently researched game engine documentation to develop and publish a gameplay mod for Project Zomboid. Reached over 1,400 unique visitors and 300+ active subscribers on the Steam Workshop.</p>
+          <div class="tech-tags">
+            <span class="tag">Lua</span>
+            <span class="tag">Game Modding</span>
+            <span class="tag">Steam Workshop API</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATIONAL PROJECTS -->
+    <section class="section">
+      <div class="section-header">
+        <h2>Educational Projects</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="projects">
+        <div class="project-card">
+          <h3>GameVault <span class="team-badge">4 Team</span></h3>
+          <p>A full-stack web platform featuring a server-authoritative real-time Pong engine. Handled concurrent user sessions, live state synchronization via WebSockets, persistent player stats, and secure JWT/bcrypt authentication flows. Completely containerized for robust deployment.</p>
+          <div class="tech-tags">
+            <span class="tag">Go / Gin</span>
+            <span class="tag">React</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">WebSockets</span>
+            <span class="tag">Docker</span>
           </div>
         </div>
 
@@ -314,17 +377,6 @@
             <span class="tag">Server Security</span>
           </div>
         </div>
-        
-        <div class="project-card">
-          <h3>Extended Explosives</h3>
-          <p>Independently researched game engine documentation to develop and publish a gameplay mod for Project Zomboid. Reached over 1,400 unique visitors and 300+ active subscribers on the Steam Workshop.</p>
-          <div class="tech-tags">
-            <span class="tag">Lua</span>
-            <span class="tag">Game Modding</span>
-            <span class="tag">Steam Workshop API</span>
-          </div>
-        </div>
-
       </div>
     </section>
 
