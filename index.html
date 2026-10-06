@@ -4,481 +4,164 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yevhen Yaniv - Backend & Full-Stack Engineer</title>
-  <!-- Шрифти: Playfair Display (для заголовків), Courier Prime (для бейджів/тегів), Inter (для основного тексту) -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Courier+Prime:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Courier+Prime:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="./favicon.png">
+  
   <style>
-    :root {
-      /* === DEADLOCK THEME (ОРИГІНАЛЬНА КОЛЬОРОВА ПАЛІТРА) === */
-      --bg-color: #08090a;
-      --card-bg: rgba(14, 16, 15, 0.85);
-      --accent: #c49a45; /* Латунь */
-      --accent-dim: #7a6029;
-      --text-main: #e2dcd0; /* Пергамент */
-      --text-muted: #a3a3a3;
-      
-      --intern-border: #10b981;
-      --intern-text: #10b981;
-      --intern-bg: rgba(16, 185, 129, 0.1);
-      
-      --alt-border: #f59e0b;
-      --alt-text: #f59e0b;
-      --alt-bg: rgba(245, 158, 11, 0.1);
-      
-      --team-bg: rgba(127, 29, 29, 0.2);
-      --team-border: #7f1d1d;
-      --team-text: #fca5a5;
-      
-      --video-filter: grayscale(80%) sepia(30%) hue-rotate(90deg) contrast(120%);
-      --overlay: radial-gradient(circle at center, rgba(10,12,10,0.5) 0%, rgba(5,6,5,0.95) 100%);
-      --card-shadow-hover: inset 0 0 30px rgba(0,0,0,0.9), 0 0 20px rgba(196, 154, 69, 0.15);
-    }
-
-    [data-theme="rainy"] {
-      /* === RAINY THEME (ДОЩОВА ТЕМА) === */
-      --bg-color: #050a14;
-      --card-bg: rgba(10, 15, 25, 0.75);
-      --accent: #7dd3fc; /* Дощовий синій */
-      --accent-dim: #0369a1;
-      --text-main: #e2e8f0;
-      --text-muted: #94a3b8;
-      
-      --intern-border: #38bdf8;
-      --intern-text: #38bdf8;
-      --intern-bg: rgba(56, 189, 248, 0.15);
-      
-      --alt-border: #818cf8;
-      --alt-text: #818cf8;
-      --alt-bg: rgba(129, 140, 248, 0.15);
-      
-      --team-bg: rgba(91, 33, 182, 0.3);
-      --team-border: #8b5cf6;
-      --team-text: #c4b5fd;
-      
-      --video-filter: grayscale(40%) hue-rotate(190deg) brightness(70%) contrast(110%);
-      --overlay: linear-gradient(to bottom, rgba(5, 10, 20, 0.7) 0%, rgba(2, 5, 10, 0.98) 100%);
-      --card-shadow-hover: inset 0 0 20px rgba(0,0,0,0.5), 0 5px 25px rgba(125, 211, 252, 0.15);
-    }
-
+    /* --- 1. Base & Shared Layout --- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { position: relative; min-height: 100vh; transition: background-color 0.5s ease, color 0.5s ease; }
+    
+    #video-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; transition: filter 0.8s ease, opacity 0.8s ease; }
+    .video-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; transition: background 0.8s ease; }
+    
+    .container { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
+    .section { margin-bottom: 4rem; }
+    .section-header { display: flex; align-items: center; margin-bottom: 1.5rem; }
+    .section-divider { flex-grow: 1; transition: all 0.5s ease; }
+    
+    .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 1.5rem; }
+    .edu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .project-card { display: flex; flex-direction: column; transition: all 0.3s ease; }
+    .project-card h3 { display: flex; justify-content: flex-start; align-items: center; gap: 1rem; }
+    .project-card p { flex-grow: 1; }
+    .team-badge { margin-left: auto; }
+    
+    .badges-container { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skills-container { display: flex; flex-direction: column; gap: 1.5rem; }
+    .skills { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+    .contact { display: flex; gap: 1.5rem; flex-wrap: wrap; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      color: var(--text-main);
-      background: var(--bg-color);
-      position: relative;
-      min-height: 100vh;
-      transition: background-color 0.5s ease, color 0.5s ease;
-    }
-
-    /* Кнопка перемикання теми */
-    .theme-toggle {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 100;
-    }
-
+    /* Theme Toggle UI */
+    .theme-toggle { position: fixed; top: 20px; left: 20px; z-index: 100; }
     .theme-btn {
-      background: var(--card-bg);
-      border: 1px solid var(--accent-dim);
-      color: var(--accent);
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.8rem;
-      font-weight: 700;
-      padding: 0.6rem 1rem;
-      border-radius: 2px;
-      cursor: pointer;
-      backdrop-filter: blur(5px);
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      background: rgba(15, 15, 15, 0.8); border: 1px solid rgba(255,255,255,0.2); color: #fff;
+      font-family: 'Courier Prime', monospace; font-size: 0.8rem; font-weight: 700;
+      padding: 0.6rem 1rem; border-radius: 4px; cursor: pointer; backdrop-filter: blur(5px);
+      transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;
     }
+    .theme-btn:hover { background: #fff; color: #000; box-shadow: 0 0 15px rgba(255,255,255,0.4); }
 
-    .theme-btn:hover {
-      background: var(--accent);
-      color: var(--bg-color);
-      box-shadow: 0 0 15px rgba(255,255,255,0.2);
-    }
-
-    #video-background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -2;
-      opacity: 0.4;
-      filter: var(--video-filter);
-      transition: filter 0.8s ease;
-    }
-
-    .video-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--overlay);
-      z-index: -1;
-      transition: background 0.8s ease;
-    }
-
-    h1, h2, h3 {
-      font-family: 'Playfair Display', serif;
-      letter-spacing: 1px;
-    }
-
-    header {
-      background: linear-gradient(to bottom, rgba(8, 9, 10, 0.95), rgba(8, 9, 10, 0.6));
-      color: var(--text-main);
-      padding: 6rem 2rem 5rem 2rem;
-      text-align: center;
-      border-bottom: 2px solid var(--accent-dim);
-      position: relative;
-      box-shadow: 0 4px 30px rgba(0,0,0,0.8);
-    }
-
-    header::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 150px;
-      height: 2px;
-      background: var(--accent);
-      box-shadow: 0 0 15px var(--accent);
-      transition: background 0.5s ease, box-shadow 0.5s ease;
-    }
-
-    header h1 {
-      font-size: 3.5rem;
-      font-weight: 900;
-      letter-spacing: 4px;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      color: #fff;
-      text-shadow: 2px 2px 0px rgba(0,0,0,1), 0 0 20px rgba(255,255,255,0.1);
-    }
-
-    header p {
-      font-family: 'Courier Prime', monospace;
-      font-size: 1.1rem;
-      color: var(--accent);
-      margin-bottom: 2rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-weight: 700;
-      transition: color 0.5s ease;
-    }
-
-    .badges-container {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 0.5rem 1.2rem;
-      border-radius: 2px;
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.5s ease;
-    }
-
-    .internship-badge {
-      background: var(--intern-bg);
-      border: 1px solid var(--intern-border);
-      color: var(--intern-text);
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
-    }
-
-    .alternance-badge {
-      background: var(--alt-bg);
-      border: 1px solid var(--alt-border);
-      color: var(--alt-text);
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
-    }
-
-    .section {
-      margin-bottom: 5rem;
-    }
+    /* --- 2. Theme: Rainy --- */
+    [data-theme="rainy"] { font-family: 'Montserrat', sans-serif; line-height: 1.6; color: #eaeaea; background: #0a0a0a; }
+    [data-theme="rainy"] #video-background { opacity: 0.35; filter: none; }
+    [data-theme="rainy"] .video-overlay { background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%); }
     
-    .section-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 2rem;
-    }
-
-    .section-header h2 {
-      font-size: 2.2rem;
-      color: var(--accent);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      white-space: nowrap;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-      transition: color 0.5s ease;
-    }
-
-    .section-divider {
-      flex-grow: 1;
-      height: 1px;
-      background: linear-gradient(to right, var(--accent-dim), transparent);
-      margin-left: 1.5rem;
-      position: relative;
-      transition: background 0.5s ease;
-    }
+    [data-theme="rainy"] header { background: rgba(0, 0, 0, 0.65); color: white; padding: 4rem 2rem; text-align: center; backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+    [data-theme="rainy"] header h1 { font-family: 'Montserrat', sans-serif; font-size: 3rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 0.5rem; text-shadow: none; text-transform: none; }
+    [data-theme="rainy"] header p { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 400; color: #cccccc; margin-bottom: 1.5rem; letter-spacing: normal; text-transform: none; }
     
-    .section-divider::before {
-      content: '◆';
-      position: absolute;
-      left: 0;
-      top: -8px;
-      color: var(--accent);
-      font-size: 12px;
-      transition: color 0.5s ease;
-    }
-
-    .about-text {
-      font-size: 1.15rem;
-      color: var(--text-main);
-      max-width: 900px;
-      background: var(--card-bg);
-      padding: 2rem;
-      border-left: 3px solid var(--accent);
-      box-shadow: 5px 5px 0px rgba(0,0,0,0.5);
-      transition: all 0.5s ease;
-    }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-      gap: 2rem;
-    }
-
-    .edu-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    .project-card {
-      background: var(--card-bg);
-      border: 1px solid var(--accent-dim);
-      border-radius: 2px;
-      padding: 1.8rem;
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 4px 10px rgba(0,0,0,0.5);
-    }
-
-    .project-card::before, .project-card::after {
-      content: '';
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border: 1px solid var(--accent);
-      transition: all 0.3s ease;
-      opacity: 0;
-    }
-    .project-card::before { top: -4px; left: -4px; border-right: none; border-bottom: none; }
-    .project-card::after { bottom: -4px; right: -4px; border-left: none; border-top: none; }
-
-    .edu-grid .project-card { padding: 1.5rem; }
+    [data-theme="rainy"] .badge { font-family: 'Montserrat', sans-serif; padding: 0.6rem 1.2rem; border-radius: 30px; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px; backdrop-filter: blur(4px); text-transform: none; border: 1px solid; }
+    [data-theme="rainy"] .internship-badge { background: rgba(21, 128, 61, 0.25); border-color: rgba(34, 197, 94, 0.5); color: #4ade80; box-shadow: none; text-shadow: none; }
+    [data-theme="rainy"] .alternance-badge { background: rgba(4, 120, 87, 0.25); border-color: rgba(16, 185, 129, 0.5); color: #34d399; box-shadow: none; text-shadow: none; }
     
-    .project-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent);
-      background: var(--bg-color);
-      box-shadow: var(--card-shadow-hover);
-    }
-
-    .project-card:hover::before, .project-card:hover::after {
-      opacity: 1;
-    }
-
-    .project-card h3 {
-      color: #ffffff;
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-      font-weight: 700;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 1rem;
-      border-bottom: 1px dashed rgba(255,255,255,0.1);
-      padding-bottom: 0.5rem;
-    }
+    [data-theme="rainy"] .section-header h2 { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; color: #ffffff; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; text-shadow: none; margin-bottom: 0; }
+    [data-theme="rainy"] .section-divider { background: linear-gradient(to right, rgba(255,255,255,0.15), transparent); height: 2px; border-radius: 2px; margin-left: 1.5rem; }
+    [data-theme="rainy"] .section-divider::before { display: none; }
     
-    .edu-grid .project-card h3 { font-size: 1.25rem; }
-
-    .team-badge {
-      background: var(--team-bg);
-      border: 1px solid var(--team-border);
-      color: var(--team-text);
-      padding: 0.2rem 0.5rem;
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-left: auto;
-      box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
-      transition: all 0.5s ease;
-    }
-
-    .project-card p {
-      margin-bottom: 1.5rem;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      flex-grow: 1;
-      transition: color 0.5s ease;
-    }
-
-    .tech-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .tag {
-      background: rgba(0,0,0,0.5);
-      border: 1px solid var(--accent-dim);
-      color: var(--accent);
-      padding: 0.2rem 0.6rem;
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      border-radius: 2px;
-      text-transform: uppercase;
-      transition: all 0.5s ease;
-    }
-
-    .skills-container {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
+    [data-theme="rainy"] .about-text { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: #d4d4d4; max-width: 900px; background: none; padding: 0; border: none; box-shadow: none; }
     
-    .skill-category h3 {
-      font-size: 1.2rem;
-      color: var(--text-main);
-      margin-bottom: 1rem;
-      font-style: italic;
-      transition: color 0.5s ease;
-    }
-
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-    }
-
-    .skill {
-      background: rgba(10, 10, 10, 0.8);
-      border: 1px solid var(--accent-dim);
-      padding: 0.5rem 1.2rem;
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      transition: all 0.3s;
-      text-transform: uppercase;
-      border-radius: 2px;
-    }
-
-    .skill:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    }
-
-    .contact {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .contact a {
-      display: inline-block;
-      background: var(--accent);
-      color: #000;
-      text-decoration: none;
-      padding: 0.8rem 2rem;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      border: 1px solid var(--accent);
-      border-radius: 2px;
-    }
-
-    .contact a.secondary {
-      background: var(--card-bg);
-      color: var(--accent);
-    }
-
-    .contact a:hover {
-      background: var(--text-main);
-      border-color: var(--text-main);
-      color: #000;
-      box-shadow: 0 0 20px rgba(255,255,255,0.2);
-    }
+    [data-theme="rainy"] .project-card { background: rgba(15, 15, 15, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.8rem; backdrop-filter: blur(5px); box-shadow: none; }
+    [data-theme="rainy"] .project-card::before, [data-theme="rainy"] .project-card::after { display: none; }
+    [data-theme="rainy"] .edu-grid .project-card { padding: 1.4rem; }
+    [data-theme="rainy"] .project-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.3); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5); background: rgba(15, 15, 15, 0.6); }
     
-    .contact a.secondary:hover {
-      background: var(--accent);
-      color: #000;
+    [data-theme="rainy"] .project-card h3 { font-family: 'Montserrat', sans-serif; color: #ffffff; margin-bottom: 0.8rem; font-size: 1.4rem; font-weight: 600; border: none; padding-bottom: 0; }
+    [data-theme="rainy"] .edu-grid .project-card h3 { font-size: 1.2rem; margin-bottom: 0.6rem; }
+    [data-theme="rainy"] .project-card p { font-family: 'Montserrat', sans-serif; margin-bottom: 1.2rem; color: #bbbbbb; font-size: 0.95rem; }
+    [data-theme="rainy"] .edu-grid .project-card p { font-size: 0.85rem; margin-bottom: 1rem; }
+    
+    [data-theme="rainy"] .team-badge { font-family: 'Montserrat', sans-serif; background: rgba(255, 170, 0, 0.12); border: 1px solid rgba(255, 170, 0, 0.4); color: #ffaa00; padding: 0.25rem 0.6rem; border-radius: 8px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; box-shadow: 0 0 10px rgba(255, 170, 0, 0.05); }
+    [data-theme="rainy"] .tag { font-family: 'Montserrat', sans-serif; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #dfdfdf; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.5px; text-transform: none; }
+    [data-theme="rainy"] .edu-grid .tag { font-size: 0.7rem; padding: 0.25rem 0.6rem; }
+    
+    [data-theme="rainy"] .skill-category h3 { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: #aaaaaa; margin-bottom: 0.8rem; font-weight: 500; font-style: normal; }
+    [data-theme="rainy"] .skill { font-family: 'Montserrat', sans-serif; background: rgba(20, 20, 20, 0.8); border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; color: #eaeaea; text-transform: none; }
+    [data-theme="rainy"] .skill:hover { border-color: #ffffff; background: rgba(40, 40, 40, 0.9); color: #ffffff; box-shadow: none; }
+    
+    [data-theme="rainy"] .contact a { font-family: 'Montserrat', sans-serif; display: inline-block; background: #ffffff; color: #000000; border: 1px solid #ffffff; padding: 0.8rem 1.5rem; border-radius: 8px; font-size: 1rem; font-weight: 600; text-transform: none; letter-spacing: normal; }
+    [data-theme="rainy"] .contact a.secondary { background: transparent; color: #ffffff; border-color: rgba(255,255,255,0.3); }
+    [data-theme="rainy"] .contact a:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(255,255,255,0.2); background: #ffffff; color: #000000; }
+    [data-theme="rainy"] .contact a.secondary:hover { background: rgba(255,255,255,0.1); color: #ffffff; }
+    
+    [data-theme="rainy"] footer { font-family: 'Montserrat', sans-serif; text-align: center; padding: 2rem; background: rgba(0, 0, 0, 0.8); border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; color: #666; backdrop-filter: blur(4px); text-transform: none; }
+
+
+    /* --- 3. Theme: Deadlock --- */
+    :root {
+      --dl-bg: #08090a;
+      --dl-card: rgba(14, 16, 15, 0.85);
+      --dl-accent: #c49a45;
+      --dl-accent-dim: #7a6029;
+      --dl-text: #e2dcd0;
+      --dl-muted: #a3a3a3;
     }
 
+    [data-theme="deadlock"] { font-family: 'Inter', sans-serif; line-height: 1.6; color: var(--dl-text); background: var(--dl-bg); }
+    [data-theme="deadlock"] #video-background { filter: grayscale(80%) sepia(30%) hue-rotate(90deg) contrast(120%); opacity: 0.4; }
+    [data-theme="deadlock"] .video-overlay { background: radial-gradient(circle at center, rgba(10,12,10,0.5) 0%, rgba(5,6,5,0.95) 100%); }
+    
+    [data-theme="deadlock"] header { background: linear-gradient(to bottom, rgba(8, 9, 10, 0.95), rgba(8, 9, 10, 0.7)); padding: 6rem 2rem 5rem; text-align: center; border-bottom: 2px solid var(--dl-accent-dim); box-shadow: 0 4px 30px rgba(0,0,0,0.8); position: relative; }
+    [data-theme="deadlock"] header::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 150px; height: 2px; background: var(--dl-accent); box-shadow: 0 0 15px var(--dl-accent); }
+    [data-theme="deadlock"] header h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; letter-spacing: 4px; margin-bottom: 0.5rem; text-transform: uppercase; color: #fff; text-shadow: 2px 2px 0px rgba(0,0,0,1), 0 0 20px rgba(196, 154, 69, 0.3); }
+    [data-theme="deadlock"] header p { font-family: 'Courier Prime', monospace; font-size: 1.1rem; color: var(--dl-accent); margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+    
+    [data-theme="deadlock"] .badge { font-family: 'Courier Prime', monospace; padding: 0.5rem 1.2rem; border-radius: 2px; font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border: 1px solid; }
+    [data-theme="deadlock"] .internship-badge { background: rgba(16, 185, 129, 0.1); border-color: #10b981; color: #10b981; box-shadow: inset 0 0 10px rgba(16, 185, 129, 0.2); text-shadow: 0 0 5px rgba(16, 185, 129, 0.5); }
+    [data-theme="deadlock"] .alternance-badge { background: rgba(245, 158, 11, 0.1); border-color: #f59e0b; color: #f59e0b; box-shadow: inset 0 0 10px rgba(245, 158, 11, 0.2); text-shadow: 0 0 5px rgba(245, 158, 11, 0.5); }
+    
+    [data-theme="deadlock"] .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--dl-accent); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+    [data-theme="deadlock"] .section-divider { background: linear-gradient(to right, var(--dl-accent-dim), transparent); height: 1px; margin-left: 1.5rem; position: relative; }
+    [data-theme="deadlock"] .section-divider::before { content: '◆'; position: absolute; left: 0; top: -8px; color: var(--dl-accent); font-size: 12px; display: block; }
+    
+    [data-theme="deadlock"] .about-text { font-family: 'Inter', sans-serif; background: var(--dl-card); padding: 2rem; border-left: 3px solid var(--dl-accent); box-shadow: 5px 5px 0px rgba(0,0,0,0.5); font-size: 1.15rem; color: var(--dl-text); }
+    
+    [data-theme="deadlock"] .project-card { background: var(--dl-card); border: 1px solid var(--dl-accent-dim); border-radius: 2px; padding: 1.8rem; box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 4px 10px rgba(0,0,0,0.5); position: relative; }
+    [data-theme="deadlock"] .project-card::before, [data-theme="deadlock"] .project-card::after { content: ''; position: absolute; width: 10px; height: 10px; border: 1px solid var(--dl-accent); opacity: 0; transition: all 0.3s ease; display: block; }
+    [data-theme="deadlock"] .project-card::before { top: -4px; left: -4px; border-right: none; border-bottom: none; }
+    [data-theme="deadlock"] .project-card::after { bottom: -4px; right: -4px; border-left: none; border-top: none; }
+    [data-theme="deadlock"] .edu-grid .project-card { padding: 1.5rem; }
+    [data-theme="deadlock"] .project-card:hover { transform: translateY(-4px); border-color: var(--dl-accent); background: rgba(20, 22, 20, 0.95); box-shadow: inset 0 0 30px rgba(0,0,0,0.9), 0 0 20px rgba(196, 154, 69, 0.15); }
+    [data-theme="deadlock"] .project-card:hover::before, [data-theme="deadlock"] .project-card:hover::after { opacity: 1; }
+    
+    [data-theme="deadlock"] .project-card h3 { font-family: 'Playfair Display', serif; color: #ffffff; font-size: 1.5rem; font-weight: 700; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 0.5rem; margin-bottom: 1rem; }
+    [data-theme="deadlock"] .edu-grid .project-card h3 { font-size: 1.25rem; margin-bottom: 0.6rem; }
+    [data-theme="deadlock"] .project-card p { font-family: 'Inter', sans-serif; color: var(--dl-muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
+    [data-theme="deadlock"] .edu-grid .project-card p { font-size: 0.85rem; margin-bottom: 1rem; }
+    
+    [data-theme="deadlock"] .team-badge { font-family: 'Courier Prime', monospace; background: rgba(127, 29, 29, 0.2); border: 1px solid #7f1d1d; color: #fca5a5; padding: 0.2rem 0.5rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; box-shadow: inset 0 0 5px rgba(127, 29, 29, 0.5); border-radius: 0; }
+    [data-theme="deadlock"] .tag { font-family: 'Courier Prime', monospace; background: rgba(0,0,0,0.5); border: 1px solid var(--dl-accent-dim); color: var(--dl-accent); padding: 0.2rem 0.6rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.5px; border-radius: 2px; text-transform: uppercase; }
+    [data-theme="deadlock"] .edu-grid .tag { font-size: 0.7rem; padding: 0.2rem 0.5rem; }
+    
+    [data-theme="deadlock"] .skill-category h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--dl-text); margin-bottom: 1rem; font-style: italic; }
+    [data-theme="deadlock"] .skill { font-family: 'Courier Prime', monospace; background: rgba(10, 10, 10, 0.8); border: 1px solid var(--dl-accent-dim); padding: 0.5rem 1.2rem; border-radius: 2px; font-size: 0.9rem; font-weight: 700; color: #999; text-transform: uppercase; }
+    [data-theme="deadlock"] .skill:hover { border-color: #10b981; color: #10b981; box-shadow: 0 0 10px rgba(16, 185, 129, 0.2), inset 0 0 10px rgba(16, 185, 129, 0.1); background: rgba(10, 10, 10, 0.8); }
+    
+    [data-theme="deadlock"] .contact a { font-family: 'Playfair Display', serif; display: inline-block; background: var(--dl-accent); color: #000; border: 1px solid #ecc97a; padding: 0.8rem 2rem; border-radius: 2px; font-size: 1.1rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; }
+    [data-theme="deadlock"] .contact a.secondary { background: var(--dl-card); color: var(--dl-accent); border-color: var(--dl-accent); }
+    [data-theme="deadlock"] .contact a:hover { background: #e3c05c; color: #000; box-shadow: 0 0 20px rgba(196, 154, 69, 0.4); transform: translateY(-2px); }
+    [data-theme="deadlock"] .contact a.secondary:hover { background: var(--dl-accent); color: #000; }
+    
+    [data-theme="deadlock"] footer { font-family: 'Courier Prime', monospace; background: var(--dl-bg); border-top: 1px solid var(--dl-accent-dim); text-align: center; padding: 3rem 2rem; font-size: 0.85rem; color: #555; text-transform: uppercase; }
+
+    /* --- 4. Media Queries --- */
     @media (max-width: 1024px) {
       .edu-grid { grid-template-columns: repeat(2, 1fr); }
     }
-
     @media (max-width: 768px) {
       .projects, .edu-grid { grid-template-columns: 1fr; }
-      header h1 { font-size: 2.5rem; }
+      [data-theme="rainy"] header h1, [data-theme="deadlock"] header h1 { font-size: 2.2rem; }
       .theme-toggle { top: 10px; left: 10px; }
       .theme-btn { font-size: 0.7rem; padding: 0.4rem 0.8rem; }
-    }
-
-    footer {
-      text-align: center;
-      padding: 3rem 2rem;
-      background: var(--bg-color);
-      border-top: 1px solid var(--accent-dim);
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      transition: all 0.5s ease;
     }
   </style>
 </head>
 <body data-theme="deadlock">
 
-  <!-- THEME TOGGLE BUTTON -->
+  <!-- Theme Controls -->
   <div class="theme-toggle">
     <button id="theme-btn" class="theme-btn">🌧️ Switch to Rainy</button>
   </div>
@@ -488,6 +171,7 @@
   </video>
   <div class="video-overlay"></div>
 
+  <!-- Header -->
   <header>
     <h1>Yevhen Yaniv</h1>
     <p>Backend / Full-Stack Software Engineer | Student at 42 Paris</p>
@@ -498,6 +182,8 @@
   </header>
 
   <div class="container">
+    
+    <!-- Profile -->
     <section class="section about">
       <div class="section-header">
         <h2>Profile</h2>
@@ -508,7 +194,7 @@
       </p>
     </section>
 
-    <!-- PERSONAL PROJECTS -->
+    <!-- Projects: Personal -->
     <section class="section">
       <div class="section-header">
         <h2>Personal Projects</h2>
@@ -538,7 +224,7 @@
       </div>
     </section>
 
-    <!-- EDUCATIONAL PROJECTS (3 in a row grid) -->
+    <!-- Projects: Educational -->
     <section class="section">
       <div class="section-header">
         <h2>Educational Projects (Ecole 42)</h2>
@@ -589,7 +275,7 @@
         </div>
 
         <div class="project-card">
-          <h3>C++ OOP Core</h3>
+          <h3>C++ OOP Core & Exams</h3>
           <p>Comprehensive deep dive into C++98 OOP (Modules 00-09). Mastered templates, STL containers, polymorphism, and algorithmic exams.</p>
           <div class="tech-tags">
             <span class="tag">C++98</span>
@@ -642,6 +328,7 @@
       </div>
     </section>
 
+    <!-- Technical Skills -->
     <section class="section">
       <div class="section-header">
         <h2>Technical Skills</h2>
@@ -687,6 +374,7 @@
       </div>
     </section>
 
+    <!-- Contact Section -->
     <section class="section">
       <div class="contact">
         <a href="mailto:evgenyaniv8@gmail.com">Email Me</a>
@@ -696,11 +384,12 @@
     </section>
   </div>
 
+  <!-- Footer -->
   <footer>
     <p>&copy; 2026 Yevhen Yaniv "pavshiy" | Paris, France</p>
   </footer>
 
-  <!-- SCRIPT FOR THEME TOGGLE -->
+  <!-- Scripts -->
   <script>
     const themeBtn = document.getElementById('theme-btn');
     
