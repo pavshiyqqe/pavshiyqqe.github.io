@@ -3,15 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yevhen Yaniv - Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <title>Yevhen Yaniv - Backend & Full-Stack Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="./favicon.png">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Montserrat', sans-serif;
@@ -39,44 +35,58 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.45); 
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
       z-index: -1;
     }
 
     header {
-      background: rgba(0, 0, 0, 0.55);
+      background: rgba(0, 0, 0, 0.65);
       color: white;
-      padding: 3rem 2rem;
+      padding: 4rem 2rem;
       text-align: center;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
     header h1 {
-      font-size: 2.8rem;
+      font-size: 3rem;
       font-weight: 800;
       letter-spacing: 2px;
+      margin-bottom: 0.5rem;
     }
 
     header p {
       font-size: 1.2rem;
       font-weight: 400;
-      opacity: 0.9;
+      color: #cccccc;
+      margin-bottom: 1.5rem;
+    }
+
+    .availability-badge {
+      display: inline-block;
+      background: rgba(46, 204, 113, 0.15);
+      border: 1px solid #2ecc71;
+      color: #2ecc71;
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
     }
 
     .container {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 2rem;
+      padding: 3rem 2rem;
     }
 
     .section {
-      margin-bottom: 3rem;
+      margin-bottom: 4rem;
     }
 
     .section h2 {
-      font-size: 1.9rem;
-      margin-bottom: 1.2rem;
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
       color: #ffffff;
       border-bottom: 2px solid rgba(255,255,255,0.1);
       padding-bottom: 0.5rem;
@@ -85,38 +95,50 @@
       letter-spacing: 1px;
     }
 
+    .about-text {
+      font-size: 1.1rem;
+      color: #d4d4d4;
+      max-width: 900px;
+    }
+
     .projects {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
       gap: 1.5rem;
     }
 
     .project-card {
-      background: rgba(15, 15, 15, 0.7);
+      background: rgba(15, 15, 15, 0.6);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
-      padding: 1.5rem;
-      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-      backdrop-filter: blur(4px);
+      border-radius: 12px;
+      padding: 1.8rem;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(5px);
+      display: flex;
+      flex-direction: column;
     }
 
     .project-card:hover {
-      transform: translateY(-6px);
-      border-color: white;
-      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
+      transform: translateY(-5px);
+      border-color: rgba(255,255,255,0.3);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
     }
 
     .project-card h3 {
       color: #ffffff;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
       font-size: 1.4rem;
       font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .project-card p {
-      margin-bottom: 1rem;
-      color: #cccccc;
+      margin-bottom: 1.2rem;
+      color: #bbbbbb;
       font-size: 0.95rem;
+      flex-grow: 1;
     }
 
     .tech-tags {
@@ -126,33 +148,49 @@
     }
 
     .tag {
-      background: rgba(255,255,255,0.1);
-      color: #fff;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #dfdfdf;
       padding: 0.3rem 0.8rem;
       border-radius: 20px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 500;
       letter-spacing: 0.5px;
+    }
+
+    .skills-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .skill-category h3 {
+      font-size: 1.1rem;
+      color: #aaaaaa;
+      margin-bottom: 0.8rem;
+      font-weight: 500;
     }
 
     .skills {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 0.8rem;
     }
 
     .skill {
-      background: rgba(20, 20, 20, 0.7);
+      background: rgba(20, 20, 20, 0.8);
       border: 1px solid rgba(255,255,255,0.1);
-      padding: 0.8rem 1.5rem;
+      padding: 0.6rem 1.2rem;
       border-radius: 8px;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
+      font-weight: 500;
       transition: all 0.3s;
     }
 
     .skill:hover {
-      border-color: white;
+      border-color: #ffffff;
       background: rgba(40, 40, 40, 0.9);
+      color: #ffffff;
     }
 
     .contact {
@@ -162,38 +200,49 @@
     }
 
     .contact a {
-      color: #ffffff;
+      display: inline-block;
+      background: #ffffff;
+      color: #000000;
       text-decoration: none;
-      font-size: 1.05rem;
-      font-weight: 500;
-      transition: color 0.3s;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .contact a.secondary {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.3);
     }
 
     .contact a:hover {
-      color: #bbbbbb;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+    }
+    
+    .contact a.secondary:hover {
+      background: rgba(255,255,255,0.1);
     }
 
     @media (max-width: 768px) {
       .projects {
         grid-template-columns: 1fr;
       }
+      header h1 {
+        font-size: 2.2rem;
+      }
     }
-
 
     footer {
       text-align: center;
       padding: 2rem;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.8);
       border-top: 1px solid rgba(255,255,255,0.1);
-      margin-top: 3rem;
       font-size: 0.9rem;
-      color: #888;
+      color: #666;
       backdrop-filter: blur(4px);
-    }
-
-    .about p {
-      font-size: 1.05rem;
-      color: #d4d4d4;
     }
   </style>
 </head>
@@ -205,25 +254,27 @@
 
   <header>
     <h1>Yevhen Yaniv</h1>
-    <p>Backend Software Engineer | Student at Ecole 42</p>
+    <p>Backend / Full-Stack Software Engineer | Student at 42 Paris</p>
+    <div class="availability-badge">🟢 Seeking 6-Month Internship (Starting Oct 2026)</div>
   </header>
 
   <div class="container">
     <section class="section about">
-      <h2>About Me</h2>
-      <p>Hi! I'm a Backend-focused Software Engineer and student at Ecole 42, building scalable APIs in Go and high-performance network servers in C++. I have a strong foundation in systems programming, containerized deployments, and relational database design. I'm passionate about code quality, resilient architecture, and system ownership, and I'm always looking to take on new infrastructure challenges.</p>
+      <h2>Profile</h2>
+      <p class="about-text">
+        Software engineering student at 42 Paris with a strong focus on backend development, cloud infrastructure, and network applications. I have hands-on experience designing reliable services, dissecting deep technical documentation, and translating complex requirements into functional, secure products. Passionate about clean architecture, pragmatic security choices, and taking full ownership of the systems I build.
+      </p>
     </section>
 
     <section class="section">
-      <h2>Projects</h2>
+      <h2>Experience & Projects</h2>
       <div class="projects">
 
         <div class="project-card">
-          <h3>ft_transcendence</h3>
-          <p>Full-stack real-time Pong platform (React, Go/Gin, PostgreSQL, WebSockets, Docker). Built the game statistics module for a backend handling concurrent user sessions and live state synchronization, working within a server-authoritative multiplayer architecture. Collaborated on a secure JWT/bcrypt authentication flow and containerized the stack with Docker Compose, including isolated networks, persistent storage volumes, and cross-platform (Fedora/podman) build fixes.</p>
+          <h3>GameVault</h3>
+          <p>A full-stack web platform featuring a server-authoritative real-time Pong engine. Handled concurrent user sessions, live state synchronization via WebSockets, persistent player stats, and secure JWT/bcrypt authentication flows. Completely containerized for robust deployment.</p>
           <div class="tech-tags">
-            <span class="tag">Go</span>
-            <span class="tag">Gin</span>
+            <span class="tag">Go / Gin</span>
             <span class="tag">React</span>
             <span class="tag">PostgreSQL</span>
             <span class="tag">WebSockets</span>
@@ -232,60 +283,105 @@
         </div>
 
         <div class="project-card">
-          <h3>Webserv & ft_irc</h3>
-          <p>An HTTP/1.1 web server and an IRC server built from scratch in C++, engineered to handle multiple simultaneous client connections. Implemented non-blocking I/O (select/poll) for efficient TCP/IP data streaming and request parsing, reducing per-connection resource overhead. Integrated CGI execution and multi-vhost configuration, ensuring robust client/server communication and strict protocol compliance.</p>
+          <h3>RAG Telegram Bot</h3>
+          <p>An automated AI assistant that ingests PDF/TXT documents, chunks content, generates vector embeddings, and leverages a Retrieval-Augmented Generation (RAG) pipeline to accurately answer user queries based on the provided context.</p>
+          <div class="tech-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Groq LLM API</span>
+            <span class="tag">Telegram API</span>
+            <span class="tag">Vector Embeddings</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>ft_irc & Webserv</h3>
+          <p>Engineered an HTTP/1.1 web server and an IRC server entirely from scratch in C++. Implemented non-blocking I/O multiplexing (select/poll) for efficient TCP/IP data streaming and concurrent client handling with strict protocol compliance.</p>
           <div class="tech-tags">
             <span class="tag">C++</span>
             <span class="tag">TCP/IP</span>
+            <span class="tag">Network Sockets</span>
             <span class="tag">HTTP/1.1</span>
-            <span class="tag">Networking</span>
           </div>
         </div>
 
         <div class="project-card">
           <h3>Inception & Born2beRoot</h3>
-          <p>Deployed a containerized service stack (Nginx, MariaDB) with isolated Docker networks and secrets managed via environment variables. Hardened a Debian server by configuring UFW firewall rules, enforcing strict PAM password policies, and restricting SSH access.</p>
+          <p>Deployed a secure, multi-container service stack (Nginx, MariaDB) with isolated Docker networks. Hardened a Debian server by configuring UFW firewall rules, enforcing strict PAM password policies, and restricting SSH access.</p>
           <div class="tech-tags">
-            <span class="tag">Docker</span>
-            <span class="tag">Nginx</span>
-            <span class="tag">MariaDB</span>
-            <span class="tag">Linux Security</span>
+            <span class="tag">Docker Compose</span>
+            <span class="tag">Linux Admin</span>
+            <span class="tag">Bash</span>
+            <span class="tag">Server Security</span>
           </div>
         </div>
+        
+        <div class="project-card">
+          <h3>Extended Explosives</h3>
+          <p>Independently researched game engine documentation to develop and publish a gameplay mod for Project Zomboid. Reached over 1,400 unique visitors and 300+ active subscribers on the Steam Workshop.</p>
+          <div class="tech-tags">
+            <span class="tag">Lua</span>
+            <span class="tag">Game Modding</span>
+            <span class="tag">Steam Workshop API</span>
+          </div>
+        </div>
+
       </div>
     </section>
 
     <section class="section">
-      <h2>Skills</h2>
-      <div class="skills">
-        <span class="skill">Go</span>
-        <span class="skill">C++</span>
-        <span class="skill">TypeScript</span>
-        <span class="skill">SQL</span>
-        <span class="skill">Python</span>
-        <span class="skill">Bash</span>
-        <span class="skill">PostgreSQL</span>
-        <span class="skill">REST APIs</span>
-        <span class="skill">WebSockets</span>
-        <span class="skill">Docker</span>
-        <span class="skill">Linux</span>
-        <span class="skill">Networking (TCP/IP, HTTP/1.1)</span>
+      <h2>Technical Skills</h2>
+      <div class="skills-container">
+        <div class="skill-category">
+          <h3>Languages</h3>
+          <div class="skills">
+            <span class="skill">Go</span>
+            <span class="skill">C / C++</span>
+            <span class="skill">Python</span>
+            <span class="skill">TypeScript</span>
+            <span class="skill">SQL</span>
+            <span class="skill">Lua</span>
+            <span class="skill">Bash</span>
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3>Backend & Architecture</h3>
+          <div class="skills">
+            <span class="skill">REST APIs</span>
+            <span class="skill">WebSockets</span>
+            <span class="skill">PostgreSQL</span>
+            <span class="skill">Gin</span>
+            <span class="skill">JWT & bcrypt</span>
+            <span class="skill">RAG Pipelines</span>
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3>Infrastructure & Tools</h3>
+          <div class="skills">
+            <span class="skill">Docker & Compose</span>
+            <span class="skill">Linux</span>
+            <span class="skill">TCP/IP & HTTP/1.1</span>
+            <span class="skill">Git & GitHub</span>
+            <span class="skill">CI/CD</span>
+            <span class="skill">Groq & Telegram APIs</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="section">
       <h2>Contact</h2>
       <div class="contact">
-        <a href="https://github.com/pavshiyqqe" target="_blank">GitHub</a>
-        <a href="mailto:evgenyaniv8@gmail.com">Email</a>
-        <a href="https://linkedin.com/in/yevhen-yaniv-906560383" target="_blank">LinkedIn</a>
-        <a href="https://discord.com/users/pavshiyjke" target="_blank">Discord: @pavshiyjke</a>
+        <a href="mailto:evgenyaniv8@gmail.com">Email Me</a>
+        <a href="https://linkedin.com/in/yevhenyaniv" target="_blank" class="secondary">LinkedIn</a>
+        <a href="https://github.com/pavshiyqqe" target="_blank" class="secondary">GitHub</a>
       </div>
     </section>
   </div>
 
   <footer>
-    <p>&copy; 2025 Yevhen Yaniv "pavshiy"</p>
+    <p>&copy; 2026 Yevhen Yaniv "pavshiy" | Paris, France</p>
   </footer>
 </body>
 </html>
