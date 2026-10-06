@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yevhen Yaniv - Backend & Full-Stack Engineer</title>
-  
+  <!-- Шрифти: Playfair Display (для заголовків), Courier Prime (для бейджів/тегів), Inter (для основного тексту) -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Courier+Prime:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="./favicon.png">
   <style>
@@ -105,4 +105,616 @@
     #video-background {
       position: fixed;
       top: 0;
-      left:
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      opacity: 0.4;
+      filter: var(--video-filter);
+      transition: filter 0.8s ease;
+    }
+
+    .video-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--overlay);
+      z-index: -1;
+      transition: background 0.8s ease;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 1px;
+    }
+
+    header {
+      background: linear-gradient(to bottom, rgba(8, 9, 10, 0.95), rgba(8, 9, 10, 0.6));
+      color: var(--text-main);
+      padding: 6rem 2rem 5rem 2rem;
+      text-align: center;
+      border-bottom: 2px solid var(--accent-dim);
+      position: relative;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.8);
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 2px;
+      background: var(--accent);
+      box-shadow: 0 0 15px var(--accent);
+      transition: background 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      letter-spacing: 4px;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow: 2px 2px 0px rgba(0,0,0,1), 0 0 20px rgba(255,255,255,0.1);
+    }
+
+    header p {
+      font-family: 'Courier Prime', monospace;
+      font-size: 1.1rem;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 700;
+      transition: color 0.5s ease;
+    }
+
+    .badges-container {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s ease;
+    }
+
+    .internship-badge {
+      background: var(--intern-bg);
+      border: 1px solid var(--intern-border);
+      color: var(--intern-text);
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .alternance-badge {
+      background: var(--alt-bg);
+      border: 1px solid var(--alt-border);
+      color: var(--alt-text);
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .section {
+      margin-bottom: 5rem;
+    }
+    
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.2rem;
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      white-space: nowrap;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      transition: color 0.5s ease;
+    }
+
+    .section-divider {
+      flex-grow: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--accent-dim), transparent);
+      margin-left: 1.5rem;
+      position: relative;
+      transition: background 0.5s ease;
+    }
+    
+    .section-divider::before {
+      content: '◆';
+      position: absolute;
+      left: 0;
+      top: -8px;
+      color: var(--accent);
+      font-size: 12px;
+      transition: color 0.5s ease;
+    }
+
+    .about-text {
+      font-size: 1.15rem;
+      color: var(--text-main);
+      max-width: 900px;
+      background: var(--card-bg);
+      padding: 2rem;
+      border-left: 3px solid var(--accent);
+      box-shadow: 5px 5px 0px rgba(0,0,0,0.5);
+      transition: all 0.5s ease;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+      gap: 2rem;
+    }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--accent-dim);
+      border-radius: 2px;
+      padding: 1.8rem;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .project-card::before, .project-card::after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border: 1px solid var(--accent);
+      transition: all 0.3s ease;
+      opacity: 0;
+    }
+    .project-card::before { top: -4px; left: -4px; border-right: none; border-bottom: none; }
+    .project-card::after { bottom: -4px; right: -4px; border-left: none; border-top: none; }
+
+    .edu-grid .project-card { padding: 1.5rem; }
+    
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      background: var(--bg-color);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .project-card:hover::before, .project-card:hover::after {
+      opacity: 1;
+    }
+
+    .project-card h3 {
+      color: #ffffff;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 1px dashed rgba(255,255,255,0.1);
+      padding-bottom: 0.5rem;
+    }
+    
+    .edu-grid .project-card h3 { font-size: 1.25rem; }
+
+    .team-badge {
+      background: var(--team-bg);
+      border: 1px solid var(--team-border);
+      color: var(--team-text);
+      padding: 0.2rem 0.5rem;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-left: auto;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+      transition: all 0.5s ease;
+    }
+
+    .project-card p {
+      margin-bottom: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      flex-grow: 1;
+      transition: color 0.5s ease;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background: rgba(0,0,0,0.5);
+      border: 1px solid var(--accent-dim);
+      color: var(--accent);
+      padding: 0.2rem 0.6rem;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      border-radius: 2px;
+      text-transform: uppercase;
+      transition: all 0.5s ease;
+    }
+
+    .skills-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    .skill-category h3 {
+      font-size: 1.2rem;
+      color: var(--text-main);
+      margin-bottom: 1rem;
+      font-style: italic;
+      transition: color 0.5s ease;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .skill {
+      background: rgba(10, 10, 10, 0.8);
+      border: 1px solid var(--accent-dim);
+      padding: 0.5rem 1.2rem;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      transition: all 0.3s;
+      text-transform: uppercase;
+      border-radius: 2px;
+    }
+
+    .skill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .contact {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .contact a {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      text-decoration: none;
+      padding: 0.8rem 2rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      border: 1px solid var(--accent);
+      border-radius: 2px;
+    }
+
+    .contact a.secondary {
+      background: var(--card-bg);
+      color: var(--accent);
+    }
+
+    .contact a:hover {
+      background: var(--text-main);
+      border-color: var(--text-main);
+      color: #000;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+    
+    .contact a.secondary:hover {
+      background: var(--accent);
+      color: #000;
+    }
+
+    @media (max-width: 1024px) {
+      .edu-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .projects, .edu-grid { grid-template-columns: 1fr; }
+      header h1 { font-size: 2.5rem; }
+      .theme-toggle { top: 10px; left: 10px; }
+      .theme-btn { font-size: 0.7rem; padding: 0.4rem 0.8rem; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: var(--bg-color);
+      border-top: 1px solid var(--accent-dim);
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      transition: all 0.5s ease;
+    }
+  </style>
+</head>
+<body data-theme="deadlock">
+
+  <!-- THEME TOGGLE BUTTON -->
+  <div class="theme-toggle">
+    <button id="theme-btn" class="theme-btn">🌧️ Switch to Rainy</button>
+  </div>
+
+  <video id="video-background" autoplay loop muted playsinline>
+    <source src="wallpaper_1.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay"></div>
+
+  <header>
+    <h1>Yevhen Yaniv</h1>
+    <p>Backend / Full-Stack Software Engineer | Student at 42 Paris</p>
+    <div class="badges-container">
+      <div class="badge internship-badge">🟢 Seeking 6-Month Internship (Starting Now)</div>
+      <div class="badge alternance-badge">🟢 Seeking 12-24 Month Alternance (Starting Now)</div>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="section about">
+      <div class="section-header">
+        <h2>Profile</h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="about-text">
+        Software engineering student at 42 Paris with a strong focus on backend development, cloud infrastructure, and network applications. I have hands-on experience designing reliable services, dissecting deep technical documentation, and translating complex requirements into functional, secure products. Passionate about clean architecture, pragmatic security choices, and taking full ownership of the systems I build.
+      </p>
+    </section>
+
+    <!-- PERSONAL PROJECTS -->
+    <section class="section">
+      <div class="section-header">
+        <h2>Personal Projects</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="projects">
+        <div class="project-card">
+          <h3>RAG Telegram Bot</h3>
+          <p>An automated AI assistant that ingests PDF/TXT documents, chunks content, generates vector embeddings, and leverages a Retrieval-Augmented Generation (RAG) pipeline to accurately answer user queries based on the provided context.</p>
+          <div class="tech-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Groq LLM</span>
+            <span class="tag">Telegram API</span>
+            <span class="tag">Embeddings</span>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <h3>Extended Explosives</h3>
+          <p>Independently researched game engine documentation to develop and publish a gameplay mod for Project Zomboid. Reached over 1,400 unique visitors and 300+ active subscribers on the Steam Workshop.</p>
+          <div class="tech-tags">
+            <span class="tag">Lua</span>
+            <span class="tag">Game Modding</span>
+            <span class="tag">Steam API</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATIONAL PROJECTS (3 in a row grid) -->
+    <section class="section">
+      <div class="section-header">
+        <h2>Educational Projects (Ecole 42)</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="edu-grid">
+        
+        <div class="project-card">
+          <h3>GameVault <span class="team-badge">Team of 4</span></h3>
+          <p>Full-stack web platform with a real-time Pong engine. Handled concurrent sessions, WebSocket sync, and JWT/bcrypt authentication flows.</p>
+          <div class="tech-tags">
+            <span class="tag">Go / Gin</span>
+            <span class="tag">React</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Docker</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>ft_irc <span class="team-badge">Team of 3</span></h3>
+          <p>Engineered an HTTP/1.1 and IRC server from scratch in C++. Used non-blocking I/O (select/poll) for efficient TCP/IP multi-client handling.</p>
+          <div class="tech-tags">
+            <span class="tag">C++</span>
+            <span class="tag">TCP/IP</span>
+            <span class="tag">Sockets</span>
+            <span class="tag">HTTP/1.1</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>Inception</h3>
+          <p>Architected a multi-container Docker environment. Built custom Nginx, WordPress, and MariaDB images with isolated networking and volumes.</p>
+          <div class="tech-tags">
+            <span class="tag">Docker Compose</span>
+            <span class="tag">Nginx</span>
+            <span class="tag">MariaDB</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>Born2beRoot</h3>
+          <p>Hardened a Debian VM. Configured LVM partitioning, enforced strict PAM password policies, UFW firewall rules, and restricted SSH access.</p>
+          <div class="tech-tags">
+            <span class="tag">Linux</span>
+            <span class="tag">Bash Scripting</span>
+            <span class="tag">Security</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>C++ OOP Core</h3>
+          <p>Comprehensive deep dive into C++98 OOP (Modules 00-09). Mastered templates, STL containers, polymorphism, and algorithmic exams.</p>
+          <div class="tech-tags">
+            <span class="tag">C++98</span>
+            <span class="tag">OOP</span>
+            <span class="tag">STL</span>
+            <span class="tag">Algorithms</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>Minishell <span class="team-badge">Team of 2</span></h3>
+          <p>Built a custom Unix shell in C. Implemented a lexer/parser, environment variables, pipes, redirections, and signal handling.</p>
+          <div class="tech-tags">
+            <span class="tag">C</span>
+            <span class="tag">System Prog</span>
+            <span class="tag">Processes</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>Cub3D <span class="team-badge">Team of 2</span></h3>
+          <p>Developed a 2.5D graphical engine using raycasting math. Managed window rendering, texture mapping, and basic collision detection.</p>
+          <div class="tech-tags">
+            <span class="tag">C</span>
+            <span class="tag">Math</span>
+            <span class="tag">Graphics API</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>Philosophers</h3>
+          <p>Solved the dining philosophers problem in C. Managed multithreading and synchronized resources using mutexes to prevent deadlocks.</p>
+          <div class="tech-tags">
+            <span class="tag">C</span>
+            <span class="tag">Multithreading</span>
+            <span class="tag">Concurrency</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>System Foundations</h3>
+          <p>Built a robust base of core C libraries (Libft), an optimized sorting algorithm (push_swap), and inter-process communication (pipex).</p>
+          <div class="tech-tags">
+            <span class="tag">C</span>
+            <span class="tag">Data Structures</span>
+            <span class="tag">Unix Env</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Technical Skills</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="skills-container">
+        <div class="skill-category">
+          <h3>Languages</h3>
+          <div class="skills">
+            <span class="skill">Go</span>
+            <span class="skill">C / C++</span>
+            <span class="skill">Python</span>
+            <span class="skill">TypeScript</span>
+            <span class="skill">SQL</span>
+            <span class="skill">Lua</span>
+            <span class="skill">Bash</span>
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3>Backend & Architecture</h3>
+          <div class="skills">
+            <span class="skill">REST APIs</span>
+            <span class="skill">WebSockets</span>
+            <span class="skill">PostgreSQL</span>
+            <span class="skill">Gin</span>
+            <span class="skill">JWT & bcrypt</span>
+            <span class="skill">RAG Pipelines</span>
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3>Infrastructure & Tools</h3>
+          <div class="skills">
+            <span class="skill">Docker & Compose</span>
+            <span class="skill">Linux</span>
+            <span class="skill">TCP/IP & HTTP/1.1</span>
+            <span class="skill">Git & GitHub</span>
+            <span class="skill">CI/CD</span>
+            <span class="skill">Groq & Telegram APIs</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="contact">
+        <a href="mailto:evgenyaniv8@gmail.com">Email Me</a>
+        <a href="https://linkedin.com/in/yevhenyaniv" target="_blank" class="secondary">LinkedIn</a>
+        <a href="https://github.com/pavshiyqqe" target="_blank" class="secondary">GitHub</a>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Yevhen Yaniv "pavshiy" | Paris, France</p>
+  </footer>
+
+  <!-- SCRIPT FOR THEME TOGGLE -->
+  <script>
+    const themeBtn = document.getElementById('theme-btn');
+    
+    themeBtn.addEventListener('click', () => {
+      const currentTheme = document.body.getAttribute('data-theme');
+      
+      if (currentTheme === 'deadlock') {
+        document.body.setAttribute('data-theme', 'rainy');
+        themeBtn.innerText = '🦇 Switch to Deadlock';
+      } else {
+        document.body.setAttribute('data-theme', 'deadlock');
+        themeBtn.innerText = '🌧️ Switch to Rainy';
+      }
+    });
+  </script>
+</body>
+</html>
