@@ -62,16 +62,35 @@
       margin-bottom: 1.5rem;
     }
 
-    .availability-badge {
+    .badges-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
       display: inline-block;
-      background: rgba(46, 204, 113, 0.15);
-      border: 1px solid #2ecc71;
-      color: #2ecc71;
       padding: 0.6rem 1.2rem;
       border-radius: 30px;
       font-size: 0.9rem;
       font-weight: 600;
       letter-spacing: 0.5px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Класичний зелений (Emerald) для стажування */
+    .internship-badge {
+      background: rgba(21, 128, 61, 0.25);
+      border: 1px solid rgba(34, 197, 94, 0.5);
+      color: #4ade80;
+    }
+
+    /* Відтінок морської хвилі/хвойний (Teal) для альтернансу */
+    .alternance-badge {
+      background: rgba(4, 120, 87, 0.25);
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      color: #34d399;
     }
 
     .container {
@@ -319,7 +338,10 @@
   <header>
     <h1>Yevhen Yaniv</h1>
     <p>Backend / Full-Stack Software Engineer | Student at 42 Paris</p>
-    <div class="availability-badge">🟢 Seeking 6-Month Internship or 12-24 Month Alternance (Starting Now)</div>
+    <div class="badges-container">
+      <div class="badge internship-badge">🟢 Seeking 6-Month Internship (Starting Now)</div>
+      <div class="badge alternance-badge">🟢 Seeking 12-24 Month Alternance (Starting Now)</div>
+    </div>
   </header>
 
   <div class="container">
