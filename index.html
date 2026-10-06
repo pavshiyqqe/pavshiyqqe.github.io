@@ -9,42 +9,54 @@
   <link rel="icon" type="image/png" href="./favicon.png">
   <style>
     :root {
-      /* === DEADLOCK THEME (DEFAULT) === */
+      /* === DEADLOCK THEME (ОРИГІНАЛЬНА КОЛЬОРОВА ПАЛІТРА) === */
       --bg-color: #08090a;
-      --noir-bg: rgba(14, 16, 15, 0.85);
-      --primary-color: #c49a45; /* Brass */
-      --dim-color: #7a6029;
-      --text-main: #e6e1d6;
+      --card-bg: rgba(14, 16, 15, 0.85);
+      --accent: #c49a45; /* Латунь */
+      --accent-dim: #7a6029;
+      --text-main: #e2dcd0; /* Пергамент */
       --text-muted: #a3a3a3;
-      --intern-color: #10b981;
-      --intern-bg: rgba(16, 185, 129, 0.15);
-      --alt-color: #f59e0b;
-      --alt-bg: rgba(245, 158, 11, 0.15);
-      --team-color: #fca5a5;
-      --team-bg: rgba(153, 27, 27, 0.2);
-      --team-border: #991b1b;
+      
+      --intern-border: #10b981;
+      --intern-text: #10b981;
+      --intern-bg: rgba(16, 185, 129, 0.1);
+      
+      --alt-border: #f59e0b;
+      --alt-text: #f59e0b;
+      --alt-bg: rgba(245, 158, 11, 0.1);
+      
+      --team-bg: rgba(127, 29, 29, 0.2);
+      --team-border: #7f1d1d;
+      --team-text: #fca5a5;
+      
       --video-filter: grayscale(80%) sepia(30%) hue-rotate(90deg) contrast(120%);
-      --overlay-gradient: radial-gradient(circle at center, rgba(10,12,10,0.6) 0%, rgba(5,6,5,0.95) 100%);
+      --overlay: radial-gradient(circle at center, rgba(10,12,10,0.5) 0%, rgba(5,6,5,0.95) 100%);
       --card-shadow-hover: inset 0 0 30px rgba(0,0,0,0.9), 0 0 20px rgba(196, 154, 69, 0.15);
     }
 
     [data-theme="rainy"] {
-      /* === RAINY THEME === */
+      /* === RAINY THEME (ДОЩОВА ТЕМА) === */
       --bg-color: #050a14;
-      --noir-bg: rgba(10, 15, 25, 0.75);
-      --primary-color: #7dd3fc; /* Rain Blue */
-      --dim-color: #0369a1;
+      --card-bg: rgba(10, 15, 25, 0.75);
+      --accent: #7dd3fc; /* Дощовий синій */
+      --accent-dim: #0369a1;
       --text-main: #e2e8f0;
       --text-muted: #94a3b8;
-      --intern-color: #38bdf8;
+      
+      --intern-border: #38bdf8;
+      --intern-text: #38bdf8;
       --intern-bg: rgba(56, 189, 248, 0.15);
-      --alt-color: #818cf8;
+      
+      --alt-border: #818cf8;
+      --alt-text: #818cf8;
       --alt-bg: rgba(129, 140, 248, 0.15);
-      --team-color: #c4b5fd;
+      
       --team-bg: rgba(91, 33, 182, 0.3);
       --team-border: #8b5cf6;
+      --team-text: #c4b5fd;
+      
       --video-filter: grayscale(40%) hue-rotate(190deg) brightness(70%) contrast(110%);
-      --overlay-gradient: linear-gradient(to bottom, rgba(5, 10, 20, 0.7) 0%, rgba(2, 5, 10, 0.98) 100%);
+      --overlay: linear-gradient(to bottom, rgba(5, 10, 20, 0.7) 0%, rgba(2, 5, 10, 0.98) 100%);
       --card-shadow-hover: inset 0 0 20px rgba(0,0,0,0.5), 0 5px 25px rgba(125, 211, 252, 0.15);
     }
 
@@ -60,7 +72,7 @@
       transition: background-color 0.5s ease, color 0.5s ease;
     }
 
-    /* THEME TOGGLE BUTTON */
+    /* Кнопка перемикання теми */
     .theme-toggle {
       position: fixed;
       top: 20px;
@@ -69,14 +81,14 @@
     }
 
     .theme-btn {
-      background: var(--noir-bg);
-      border: 1px solid var(--dim-color);
-      color: var(--primary-color);
+      background: var(--card-bg);
+      border: 1px solid var(--accent-dim);
+      color: var(--accent);
       font-family: 'Courier Prime', monospace;
       font-size: 0.8rem;
       font-weight: 700;
       padding: 0.6rem 1rem;
-      border-radius: 4px;
+      border-radius: 2px;
       cursor: pointer;
       backdrop-filter: blur(5px);
       transition: all 0.3s ease;
@@ -85,7 +97,7 @@
     }
 
     .theme-btn:hover {
-      background: var(--primary-color);
+      background: var(--accent);
       color: var(--bg-color);
       box-shadow: 0 0 15px rgba(255,255,255,0.2);
     }
@@ -93,615 +105,4 @@
     #video-background {
       position: fixed;
       top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -2;
-      opacity: 0.35;
-      filter: var(--video-filter);
-      transition: filter 0.8s ease;
-    }
-
-    .video-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--overlay-gradient);
-      z-index: -1;
-      transition: background 0.8s ease;
-    }
-
-    h1, h2, h3 {
-      font-family: 'Playfair Display', serif;
-      letter-spacing: 1px;
-    }
-
-    header {
-      background: linear-gradient(to bottom, rgba(8, 9, 10, 0.95), rgba(8, 9, 10, 0.4));
-      color: var(--text-main);
-      padding: 6rem 2rem 5rem 2rem;
-      text-align: center;
-      border-bottom: 2px solid var(--dim-color);
-      position: relative;
-      box-shadow: 0 4px 30px rgba(0,0,0,0.8);
-    }
-
-    header::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 150px;
-      height: 2px;
-      background: var(--primary-color);
-      box-shadow: 0 0 15px var(--primary-color);
-      transition: all 0.5s ease;
-    }
-
-    header h1 {
-      font-size: 3.5rem;
-      font-weight: 900;
-      letter-spacing: 4px;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      color: #fff;
-      text-shadow: 2px 2px 0px rgba(0,0,0,1), 0 0 20px rgba(255,255,255,0.1);
-    }
-
-    header p {
-      font-family: 'Courier Prime', monospace;
-      font-size: 1.1rem;
-      color: var(--primary-color);
-      margin-bottom: 2rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-weight: 700;
-      transition: color 0.5s ease;
-    }
-
-    .badges-container {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 0.5rem 1.2rem;
-      border-radius: 2px;
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      backdrop-filter: blur(4px);
-      transition: all 0.5s ease;
-    }
-
-    .internship-badge {
-      background: var(--intern-bg);
-      border: 1px solid var(--intern-color);
-      color: var(--intern-color);
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
-    }
-
-    .alternance-badge {
-      background: var(--alt-bg);
-      border: 1px solid var(--alt-color);
-      color: var(--alt-color);
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
-    }
-
-    .section {
-      margin-bottom: 5rem;
-    }
-    
-    .section-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 2rem;
-    }
-
-    .section-header h2 {
-      font-size: 2.2rem;
-      color: var(--primary-color);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      white-space: nowrap;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-      transition: color 0.5s ease;
-    }
-
-    .section-divider {
-      flex-grow: 1;
-      height: 1px;
-      background: linear-gradient(to right, var(--dim-color), transparent);
-      margin-left: 1.5rem;
-      position: relative;
-      transition: background 0.5s ease;
-    }
-    
-    .section-divider::before {
-      content: '◆';
-      position: absolute;
-      left: 0;
-      top: -8px;
-      color: var(--primary-color);
-      font-size: 12px;
-      transition: color 0.5s ease;
-    }
-
-    .about-text {
-      font-size: 1.15rem;
-      color: var(--text-main);
-      max-width: 900px;
-      background: var(--noir-bg);
-      padding: 2rem;
-      border-left: 3px solid var(--primary-color);
-      box-shadow: 5px 5px 0px rgba(0,0,0,0.5);
-      transition: all 0.5s ease;
-    }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-      gap: 2rem;
-    }
-
-    .edu-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    .project-card {
-      background: var(--noir-bg);
-      border: 1px solid var(--dim-color);
-      border-radius: 2px;
-      padding: 1.8rem;
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 4px 10px rgba(0,0,0,0.5);
-    }
-
-    .project-card::before, .project-card::after {
-      content: '';
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border: 1px solid var(--primary-color);
-      transition: all 0.3s ease;
-      opacity: 0;
-    }
-    .project-card::before { top: -4px; left: -4px; border-right: none; border-bottom: none; }
-    .project-card::after { bottom: -4px; right: -4px; border-left: none; border-top: none; }
-
-    .edu-grid .project-card { padding: 1.5rem; }
-    
-    .project-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--primary-color);
-      background: var(--bg-color);
-      box-shadow: var(--card-shadow-hover);
-    }
-
-    .project-card:hover::before, .project-card:hover::after {
-      opacity: 1;
-    }
-
-    .project-card h3 {
-      color: #ffffff;
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-      font-weight: 700;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 1rem;
-      border-bottom: 1px dashed rgba(255,255,255,0.1);
-      padding-bottom: 0.5rem;
-    }
-    
-    .edu-grid .project-card h3 { font-size: 1.25rem; }
-
-    .team-badge {
-      background: var(--team-bg);
-      border: 1px solid var(--team-border);
-      color: var(--team-color);
-      padding: 0.2rem 0.5rem;
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-left: auto;
-      transition: all 0.5s ease;
-    }
-
-    .project-card p {
-      margin-bottom: 1.5rem;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      flex-grow: 1;
-      transition: color 0.5s ease;
-    }
-
-    .tech-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .tag {
-      background: rgba(0,0,0,0.5);
-      border: 1px solid var(--dim-color);
-      color: var(--primary-color);
-      padding: 0.2rem 0.6rem;
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      border-radius: 2px;
-      text-transform: uppercase;
-      transition: all 0.5s ease;
-    }
-
-    .skills-container {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-    
-    .skill-category h3 {
-      font-size: 1.2rem;
-      color: var(--text-main);
-      margin-bottom: 1rem;
-      font-style: italic;
-      transition: color 0.5s ease;
-    }
-
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-    }
-
-    .skill {
-      background: rgba(10, 10, 10, 0.8);
-      border: 1px solid var(--dim-color);
-      padding: 0.5rem 1.2rem;
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      transition: all 0.3s;
-      text-transform: uppercase;
-      border-radius: 2px;
-    }
-
-    .skill:hover {
-      border-color: var(--primary-color);
-      color: var(--primary-color);
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    }
-
-    .contact {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .contact a {
-      display: inline-block;
-      background: var(--primary-color);
-      color: #000;
-      text-decoration: none;
-      padding: 0.8rem 2rem;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      border: 1px solid var(--primary-color);
-      border-radius: 2px;
-    }
-
-    .contact a.secondary {
-      background: var(--noir-bg);
-      color: var(--primary-color);
-      border: 1px solid var(--primary-color);
-    }
-
-    .contact a:hover {
-      background: var(--text-main);
-      border-color: var(--text-main);
-      color: #000;
-      box-shadow: 0 0 20px rgba(255,255,255,0.2);
-    }
-    
-    .contact a.secondary:hover {
-      background: var(--primary-color);
-      color: #000;
-    }
-
-    @media (max-width: 1024px) {
-      .edu-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 768px) {
-      .projects, .edu-grid { grid-template-columns: 1fr; }
-      header h1 { font-size: 2.5rem; }
-      .theme-toggle { top: 10px; left: 10px; }
-      .theme-btn { font-size: 0.7rem; padding: 0.4rem 0.8rem; }
-    }
-
-    footer {
-      text-align: center;
-      padding: 3rem 2rem;
-      background: var(--bg-color);
-      border-top: 1px solid var(--dim-color);
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      transition: all 0.5s ease;
-    }
-  </style>
-</head>
-<body data-theme="deadlock">
-
-  <!-- THEME TOGGLE -->
-  <div class="theme-toggle">
-    <button id="theme-btn" class="theme-btn">🌧️ Switch to Rainy</button>
-  </div>
-
-  <video id="video-background" autoplay loop muted playsinline>
-    <source src="wallpaper_1.mp4" type="video/mp4">
-  </video>
-  <div class="video-overlay"></div>
-
-  <header>
-    <h1>Yevhen Yaniv</h1>
-    <p>Backend & Full-Stack Operative // Ecole 42</p>
-    <div class="badges-container">
-      <div class="badge internship-badge">Status: Seeking 6-Mo Internship</div>
-      <div class="badge alternance-badge">Status: Seeking 12-24 Mo Alternance</div>
-    </div>
-  </header>
-
-  <div class="container">
-    <section class="section about">
-      <div class="section-header">
-        <h2>Dossier</h2>
-        <div class="section-divider"></div>
-      </div>
-      <p class="about-text">
-        Software engineering operative stationed at 42 Paris, specializing in backend architecture, cloud infrastructure, and low-level networked applications. Experienced in dissecting deep technical documentation, bypassing standard frameworks to build reliable services from scratch, and translating cryptic requirements into highly secure, functional systems.
-      </p>
-    </section>
-
-    <!-- PERSONAL PROJECTS -->
-    <section class="section">
-      <div class="section-header">
-        <h2>Classified Projects</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="projects">
-        <div class="project-card">
-          <h3>RAG Telegram Bot</h3>
-          <p>An automated AI entity that ingests PDF/TXT documents, chunks esoteric content, generates vector embeddings, and leverages a RAG pipeline to accurately decrypt and answer user queries based on provided context.</p>
-          <div class="tech-tags">
-            <span class="tag">Python</span>
-            <span class="tag">Groq LLM</span>
-            <span class="tag">Telegram API</span>
-            <span class="tag">Embeddings</span>
-          </div>
-        </div>
-        
-        <div class="project-card">
-          <h3>Extended Explosives</h3>
-          <p>Independently researched game engine mechanics to develop and deploy a volatile gameplay mod for Project Zomboid. Reached over 1,400 unique subjects and 300+ active subscribers on the Steam Workshop.</p>
-          <div class="tech-tags">
-            <span class="tag">Lua</span>
-            <span class="tag">Game Modding</span>
-            <span class="tag">Steam API</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- EDUCATIONAL PROJECTS -->
-    <section class="section">
-      <div class="section-header">
-        <h2>Academy Archives (Ecole 42)</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="edu-grid">
-        
-        <div class="project-card">
-          <h3>GameVault <span class="team-badge">Co-op [4]</span></h3>
-          <p>Full-stack web platform with a real-time server-authoritative engine. Handled concurrent sessions, WebSocket sync, and JWT authentication flows.</p>
-          <div class="tech-tags">
-            <span class="tag">Go / Gin</span>
-            <span class="tag">React</span>
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">Docker</span>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <h3>ft_irc <span class="team-badge">Co-op [3]</span></h3>
-          <p>Engineered HTTP/1.1 and IRC servers from scratch in C++. Utilized non-blocking I/O multiplexing (select/poll) for heavy TCP/IP traffic.</p>
-          <div class="tech-tags">
-            <span class="tag">C++</span>
-            <span class="tag">TCP/IP</span>
-            <span class="tag">Sockets</span>
-            <span class="tag">HTTP/1.1</span>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <h3>Inception</h3>
-          <p>Architected a multi-container Docker environment. Forged custom Nginx, WordPress, and MariaDB images with strictly isolated networking.</p>
-          <div class="tech-tags">
-            <span class="tag">Docker Compose</span>
-            <span class="tag">Nginx</span>
-            <span class="tag">MariaDB</span>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <h3>Born2beRoot</h3>
-          <p>Hardened a Debian VM. Configured LVM partitions, enforced strict PAM password policies, UFW firewall rules, and locked down SSH access.</p>
-          <div class="tech-tags">
-            <span class="tag">Linux</span>
-            <span class="tag">Bash Script</span>
-            <span class="tag">Security</span>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <h3>C++ OOP Core</h3>
-          <p>Deep dive into C++98 OOP architecture. Mastered templates, STL containers, polymorphism, and algorithmic optimization under strict constraints.</p>
-          <div class="tech-tags">
-            <span class="tag">C++98</span>
-            <span class="tag">OOP</span>
-            <span class="tag">STL</span>
-            <span class="tag">Algorithms</span>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <h3>Minishell <span class="team-badge">Co-op [2]</span></h3>
-          <p>Constructed a custom Unix shell in C. Implemented a lexer/parser, environment variable expansion, pipes, redirections, and signal handling.</p>
-          <div class="tech-tags">
-            <span class="tag">C</span>
-            <span class="tag">System Prog</span>
-            <span class="tag">Processes</span>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <h3>Cub3D <span class="team-badge">Co-op [2]</span></h3>
-          <p>Forged a 2.5D graphical engine using raycasting mathematics. Managed raw window rendering, texture mapping, and collision detection.</p>
-          <div class="tech-tags">
-            <span class="tag">C</span>
-            <span class="tag">Math</span>
-            <span class="tag">Graphics API</span>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <h3>Philosophers</h3>
-          <p>Resolved the dining philosophers concurrency paradox in C. Handled multithreading and synchronized resources using mutexes to avoid deadlocks.</p>
-          <div class="tech-tags">
-            <span class="tag">C</span>
-            <span class="tag">Multithreading</span>
-            <span class="tag">Concurrency</span>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <h3>System Core</h3>
-          <p>Built a robust foundation of core C libraries (Libft), an optimized bitwise sorting algorithm (push_swap), and inter-process pipelines (pipex).</p>
-          <div class="tech-tags">
-            <span class="tag">C</span>
-            <span class="tag">Data Structs</span>
-            <span class="tag">Unix Env</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-header">
-        <h2>Arsenal & Tooling</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="skills-container">
-        <div class="skill-category">
-          <h3>Primary Languages</h3>
-          <div class="skills">
-            <span class="skill">Go</span>
-            <span class="skill">C / C++</span>
-            <span class="skill">Python</span>
-            <span class="skill">TypeScript</span>
-            <span class="skill">SQL</span>
-            <span class="skill">Lua</span>
-            <span class="skill">Bash</span>
-          </div>
-        </div>
-        
-        <div class="skill-category">
-          <h3>Backend & Architecture</h3>
-          <div class="skills">
-            <span class="skill">REST APIs</span>
-            <span class="skill">WebSockets</span>
-            <span class="skill">PostgreSQL</span>
-            <span class="skill">Gin</span>
-            <span class="skill">JWT & bcrypt</span>
-            <span class="skill">RAG Pipelines</span>
-          </div>
-        </div>
-        
-        <div class="skill-category">
-          <h3>Infrastructure & Networks</h3>
-          <div class="skills">
-            <span class="skill">Docker & Compose</span>
-            <span class="skill">Linux</span>
-            <span class="skill">TCP/IP & HTTP/1.1</span>
-            <span class="skill">Git & GitHub</span>
-            <span class="skill">CI/CD</span>
-            <span class="skill">Groq & Telegram APIs</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="contact">
-        <a href="mailto:evgenyaniv8@gmail.com">Initiate Contact</a>
-        <a href="https://linkedin.com/in/yevhenyaniv" target="_blank" class="secondary">LinkedIn</a>
-        <a href="https://github.com/pavshiyqqe" target="_blank" class="secondary">GitHub</a>
-      </div>
-    </section>
-  </div>
-
-  <footer>
-    <p>File #42-YY // Year 2026 // Location: Paris, FR</p>
-  </footer>
-
-  <!-- SCRIPT FOR THEME TOGGLE -->
-  <script>
-    const themeBtn = document.getElementById('theme-btn');
-    
-    themeBtn.addEventListener('click', () => {
-      const currentTheme = document.body.getAttribute('data-theme');
-      
-      if (currentTheme === 'deadlock') {
-        document.body.setAttribute('data-theme', 'rainy');
-        themeBtn.innerText = '🦇 Switch to Deadlock';
-      } else {
-        document.body.setAttribute('data-theme', 'deadlock');
-        themeBtn.innerText = '🌧️ Switch to Rainy';
-      }
-    });
-  </script>
-</body>
-</html>
+      left:
