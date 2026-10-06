@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yevhen Yaniv - Occult Backend Engineer</title>
-  <!-- Шрифти в стилі окультного нуару та розслідувань 1930-х -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Courier+Prime:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <title>Yevhen Yaniv - Backend & Full-Stack Engineer</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Courier+Prime:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="./favicon.png">
   <style>
     :root {
@@ -15,8 +15,8 @@
       --brass-dim: #7a6029;
       --spectral-green: #10b981;
       --occult-amber: #f59e0b;
-      --parchment: #e2dcd0;
-      --blood-red: #7f1d1d;
+      --parchment: #e6e1d6;
+      --blood-red: #991b1b;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,7 +30,6 @@
       min-height: 100vh;
     }
 
-    /* Фонове відео з жорстким віньєтуванням та зеленуватим нуар-фільтром */
     #video-background {
       position: fixed;
       top: 0;
@@ -39,8 +38,8 @@
       height: 100%;
       object-fit: cover;
       z-index: -2;
-      opacity: 0.4;
-      filter: grayscale(80%) sepia(30%) hue-rotate(90deg) contrast(120%);
+      opacity: 0.35;
+      filter: grayscale(60%) sepia(20%) hue-rotate(90deg) contrast(110%);
     }
 
     .video-overlay {
@@ -49,23 +48,23 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at center, rgba(10,12,10,0.5) 0%, rgba(5,6,5,0.95) 100%);
+      background: radial-gradient(circle at center, rgba(10,12,10,0.6) 0%, rgba(5,6,5,0.95) 100%);
       z-index: -1;
     }
 
     h1, h2, h3 {
       font-family: 'Playfair Display', serif;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
     }
 
     header {
-      background: linear-gradient(to bottom, rgba(8, 9, 10, 0.95), rgba(8, 9, 10, 0.7));
+      background: linear-gradient(to bottom, rgba(8, 9, 10, 0.95), rgba(8, 9, 10, 0.6));
       color: var(--parchment);
       padding: 5rem 2rem;
       text-align: center;
-      border-bottom: 2px solid var(--brass-dim);
+      border-bottom: 1px solid var(--brass-dim);
       position: relative;
-      box-shadow: 0 4px 30px rgba(0,0,0,0.8);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
     }
 
     header::after {
@@ -77,29 +76,27 @@
       width: 150px;
       height: 2px;
       background: var(--brass-primary);
-      box-shadow: 0 0 15px var(--brass-primary);
+      box-shadow: 0 0 10px rgba(196, 154, 69, 0.5);
     }
 
     header h1 {
       font-size: 3.5rem;
       font-weight: 900;
-      letter-spacing: 4px;
+      letter-spacing: 2px;
       margin-bottom: 0.5rem;
-      text-transform: uppercase;
       color: #fff;
-      text-shadow: 2px 2px 0px rgba(0,0,0,1), 0 0 20px rgba(196, 154, 69, 0.3);
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
     }
 
     header p {
-      font-family: 'Courier Prime', monospace;
-      font-size: 1.1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.15rem;
       color: var(--brass-primary);
       margin-bottom: 2rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      font-weight: 500;
+      letter-spacing: 1px;
     }
 
-    /* Бейджі в стилі містичних контрактів / карток статусу */
     .badges-container {
       display: flex;
       justify-content: center;
@@ -114,26 +111,23 @@
       font-family: 'Courier Prime', monospace;
       font-size: 0.85rem;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
-      position: relative;
-      overflow: hidden;
+      backdrop-filter: blur(4px);
     }
 
     .internship-badge {
       background: rgba(16, 185, 129, 0.1);
       border: 1px solid var(--spectral-green);
       color: var(--spectral-green);
-      box-shadow: inset 0 0 10px rgba(16, 185, 129, 0.2);
-      text-shadow: 0 0 5px rgba(16, 185, 129, 0.5);
+      box-shadow: inset 0 0 8px rgba(16, 185, 129, 0.15);
     }
 
     .alternance-badge {
       background: rgba(245, 158, 11, 0.1);
       border: 1px solid var(--occult-amber);
       color: var(--occult-amber);
-      box-shadow: inset 0 0 10px rgba(245, 158, 11, 0.2);
-      text-shadow: 0 0 5px rgba(245, 158, 11, 0.5);
+      box-shadow: inset 0 0 8px rgba(245, 158, 11, 0.15);
     }
 
     .container {
@@ -153,13 +147,11 @@
     }
 
     .section-header h2 {
-      font-size: 2.2rem;
+      font-size: 2rem;
       color: var(--brass-primary);
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
       white-space: nowrap;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
 
     .section-divider {
@@ -180,16 +172,15 @@
     }
 
     .about-text {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       color: var(--parchment);
       max-width: 900px;
       background: var(--noir-bg);
       padding: 2rem;
       border-left: 3px solid var(--brass-primary);
-      box-shadow: 5px 5px 0px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
 
-    /* Сітки проєктів */
     .projects {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
@@ -202,25 +193,23 @@
       gap: 1.5rem;
     }
 
-    /* Картки в стилі Deadlock (гострі кути, латунні рамки) */
     .project-card {
       background: var(--noir-bg);
-      border: 1px solid var(--brass-dim);
+      border: 1px solid rgba(122, 96, 41, 0.3);
       border-radius: 2px;
       padding: 1.8rem;
       transition: all 0.3s ease;
       display: flex;
       flex-direction: column;
       position: relative;
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 4px 10px rgba(0,0,0,0.5);
+      box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 4px 10px rgba(0,0,0,0.3);
     }
 
-    /* Кутові декорації */
     .project-card::before, .project-card::after {
       content: '';
       position: absolute;
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       border: 1px solid var(--brass-primary);
       transition: all 0.3s ease;
       opacity: 0;
@@ -232,9 +221,9 @@
     
     .project-card:hover {
       transform: translateY(-4px);
-      border-color: var(--brass-primary);
-      background: rgba(20, 22, 20, 0.95);
-      box-shadow: inset 0 0 30px rgba(0,0,0,0.9), 0 0 20px rgba(196, 154, 69, 0.15);
+      border-color: var(--brass-dim);
+      background: rgba(18, 20, 18, 0.95);
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 6px 15px rgba(0,0,0,0.6);
     }
 
     .project-card:hover::before, .project-card:hover::after {
@@ -244,7 +233,7 @@
     .project-card h3 {
       color: #ffffff;
       margin-bottom: 1rem;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 700;
       display: flex;
       justify-content: flex-start;
@@ -254,26 +243,24 @@
       padding-bottom: 0.5rem;
     }
     
-    .edu-grid .project-card h3 { font-size: 1.25rem; }
+    .edu-grid .project-card h3 { font-size: 1.2rem; }
 
-    /* Бейдж команди як печатка/штамп */
     .team-badge {
-      background: rgba(127, 29, 29, 0.2);
-      border: 1px solid var(--blood-red);
+      background: rgba(153, 27, 27, 0.15);
+      border: 1px solid rgba(153, 27, 27, 0.5);
       color: #fca5a5;
-      padding: 0.2rem 0.5rem;
+      padding: 0.2rem 0.6rem;
       font-family: 'Courier Prime', monospace;
       font-size: 0.7rem;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
       margin-left: auto;
-      box-shadow: inset 0 0 5px rgba(127, 29, 29, 0.5);
     }
 
     .project-card p {
       margin-bottom: 1.5rem;
-      color: #a3a3a3;
+      color: #b3b3b3;
       font-size: 0.95rem;
       flex-grow: 1;
     }
@@ -284,16 +271,14 @@
       gap: 0.5rem;
     }
 
-    /* Теги у вигляді друкарського тексту */
     .tag {
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.4);
       border: 1px solid var(--brass-dim);
       color: var(--brass-primary);
       padding: 0.2rem 0.6rem;
       font-family: 'Courier Prime', monospace;
       font-size: 0.75rem;
       font-weight: 700;
-      letter-spacing: 0.5px;
       border-radius: 2px;
       text-transform: uppercase;
     }
@@ -308,7 +293,6 @@
       font-size: 1.2rem;
       color: var(--parchment);
       margin-bottom: 1rem;
-      font-style: italic;
     }
 
     .skills {
@@ -318,22 +302,21 @@
     }
 
     .skill {
-      background: rgba(10, 10, 10, 0.8);
-      border: 1px solid var(--brass-dim);
-      padding: 0.5rem 1.2rem;
-      font-family: 'Courier Prime', monospace;
+      background: rgba(15, 15, 15, 0.8);
+      border: 1px solid rgba(122, 96, 41, 0.4);
+      padding: 0.6rem 1.2rem;
+      font-family: 'Inter', sans-serif;
       font-size: 0.9rem;
-      font-weight: 700;
-      color: #999;
+      font-weight: 500;
+      color: #d4d4d4;
       transition: all 0.3s;
-      text-transform: uppercase;
       border-radius: 2px;
     }
 
     .skill:hover {
-      border-color: var(--spectral-green);
-      color: var(--spectral-green);
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.2), inset 0 0 10px rgba(16, 185, 129, 0.1);
+      border-color: var(--brass-primary);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(196, 154, 69, 0.15);
     }
 
     .contact {
@@ -342,18 +325,15 @@
       flex-wrap: wrap;
     }
 
-    /* Кнопки зв'язку в стилі латунних табличок */
     .contact a {
       display: inline-block;
       background: var(--brass-primary);
       color: #000;
       text-decoration: none;
       padding: 0.8rem 2rem;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
       transition: all 0.3s ease;
       border: 1px solid #ecc97a;
       border-radius: 2px;
@@ -362,18 +342,18 @@
     .contact a.secondary {
       background: var(--noir-bg);
       color: var(--brass-primary);
-      border: 1px solid var(--brass-primary);
+      border: 1px solid var(--brass-dim);
     }
 
     .contact a:hover {
       background: #e3c05c;
       color: #000;
-      box-shadow: 0 0 20px rgba(196, 154, 69, 0.4);
+      box-shadow: 0 4px 15px rgba(196, 154, 69, 0.3);
     }
     
     .contact a.secondary:hover {
-      background: var(--brass-primary);
-      color: #000;
+      background: rgba(196, 154, 69, 0.1);
+      border-color: var(--brass-primary);
     }
 
     @media (max-width: 1024px) {
@@ -389,11 +369,10 @@
       text-align: center;
       padding: 3rem 2rem;
       background: var(--void-black);
-      border-top: 1px solid var(--brass-dim);
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.85rem;
-      color: #555;
-      text-transform: uppercase;
+      border-top: 1px solid rgba(122, 96, 41, 0.2);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: #666;
     }
   </style>
 </head>
@@ -405,34 +384,34 @@
 
   <header>
     <h1>Yevhen Yaniv</h1>
-    <p>Backend & Full-Stack Operative // Ecole 42</p>
+    <p>Backend / Full-Stack Software Engineer | Student at 42 Paris</p>
     <div class="badges-container">
-      <div class="badge internship-badge">Status: Seeking 6-Mo Internship</div>
-      <div class="badge alternance-badge">Status: Seeking 12-24 Mo Alternance</div>
+      <div class="badge internship-badge">🟢 Seeking 6-Month Internship (Starting Now)</div>
+      <div class="badge alternance-badge">🟢 Seeking 12-24 Month Alternance (Starting Now)</div>
     </div>
   </header>
 
   <div class="container">
     <section class="section about">
       <div class="section-header">
-        <h2>Dossier</h2>
+        <h2>Profile</h2>
         <div class="section-divider"></div>
       </div>
       <p class="about-text">
-        Software engineering operative stationed at 42 Paris, specializing in backend architecture, cloud infrastructure, and low-level networked applications. Experienced in dissecting deep technical documentation, bypassing standard frameworks to build reliable services from scratch, and translating cryptic requirements into highly secure, functional systems.
+        Software engineering student at 42 Paris with a strong focus on backend development, cloud infrastructure, and network applications. I have hands-on experience designing reliable services, dissecting deep technical documentation, and translating complex requirements into functional, secure products. Passionate about clean architecture, pragmatic security choices, and taking full ownership of the systems I build.
       </p>
     </section>
 
     <!-- PERSONAL PROJECTS -->
     <section class="section">
       <div class="section-header">
-        <h2>Classified Projects</h2>
+        <h2>Personal Projects</h2>
         <div class="section-divider"></div>
       </div>
       <div class="projects">
         <div class="project-card">
           <h3>RAG Telegram Bot</h3>
-          <p>An automated AI entity that ingests PDF/TXT documents, chunks esoteric content, generates vector embeddings, and leverages a RAG pipeline to accurately decrypt and answer user queries based on provided context.</p>
+          <p>An automated AI assistant that ingests PDF/TXT documents, chunks content, generates vector embeddings, and leverages a Retrieval-Augmented Generation (RAG) pipeline to accurately answer user queries based on the provided context.</p>
           <div class="tech-tags">
             <span class="tag">Python</span>
             <span class="tag">Groq LLM</span>
@@ -443,7 +422,7 @@
         
         <div class="project-card">
           <h3>Extended Explosives</h3>
-          <p>Independently researched game engine mechanics to develop and deploy a volatile gameplay mod for Project Zomboid. Reached over 1,400 unique subjects and 300+ active subscribers on the Steam Workshop.</p>
+          <p>Independently researched game engine documentation to develop and publish a gameplay mod for Project Zomboid. Reached over 1,400 unique visitors and 300+ active subscribers on the Steam Workshop.</p>
           <div class="tech-tags">
             <span class="tag">Lua</span>
             <span class="tag">Game Modding</span>
@@ -456,14 +435,14 @@
     <!-- EDUCATIONAL PROJECTS -->
     <section class="section">
       <div class="section-header">
-        <h2>Academy Archives (Ecole 42)</h2>
+        <h2>Educational Projects (Ecole 42)</h2>
         <div class="section-divider"></div>
       </div>
       <div class="edu-grid">
         
         <div class="project-card">
-          <h3>GameVault <span class="team-badge">Co-op [4]</span></h3>
-          <p>Full-stack web platform with a real-time server-authoritative engine. Handled concurrent sessions, WebSocket sync, and JWT authentication flows.</p>
+          <h3>GameVault <span class="team-badge">Team of 4</span></h3>
+          <p>Full-stack web platform with a real-time Pong engine. Handled concurrent sessions, WebSocket sync, and JWT/bcrypt authentication flows.</p>
           <div class="tech-tags">
             <span class="tag">Go / Gin</span>
             <span class="tag">React</span>
@@ -473,8 +452,8 @@
         </div>
 
         <div class="project-card">
-          <h3>ft_irc & Webserv <span class="team-badge">Co-op [3]</span></h3>
-          <p>Engineered HTTP/1.1 and IRC servers from scratch in C++. Utilized non-blocking I/O multiplexing (select/poll) for heavy TCP/IP traffic.</p>
+          <h3>ft_irc & Webserv <span class="team-badge">Team of 3</span></h3>
+          <p>Engineered HTTP/1.1 and IRC servers from scratch in C++. Used non-blocking I/O (select/poll) for efficient TCP/IP multi-client handling.</p>
           <div class="tech-tags">
             <span class="tag">C++</span>
             <span class="tag">TCP/IP</span>
@@ -485,7 +464,7 @@
 
         <div class="project-card">
           <h3>Inception</h3>
-          <p>Architected a multi-container Docker environment. Forged custom Nginx, WordPress, and MariaDB images with strictly isolated networking.</p>
+          <p>Architected a multi-container Docker environment. Built custom Nginx, WordPress, and MariaDB images with isolated networking and volumes.</p>
           <div class="tech-tags">
             <span class="tag">Docker Compose</span>
             <span class="tag">Nginx</span>
@@ -495,17 +474,17 @@
 
         <div class="project-card">
           <h3>Born2beRoot</h3>
-          <p>Hardened a Debian VM. Configured LVM partitions, enforced strict PAM password policies, UFW firewall rules, and locked down SSH access.</p>
+          <p>Hardened a Debian VM. Configured LVM partitioning, enforced strict PAM password policies, UFW firewall rules, and restricted SSH access.</p>
           <div class="tech-tags">
             <span class="tag">Linux</span>
-            <span class="tag">Bash Script</span>
+            <span class="tag">Bash Scripting</span>
             <span class="tag">Security</span>
           </div>
         </div>
 
         <div class="project-card">
           <h3>C++ OOP Core</h3>
-          <p>Deep dive into C++98 OOP architecture. Mastered templates, STL containers, polymorphism, and algorithmic optimization under strict constraints.</p>
+          <p>Comprehensive deep dive into C++98 OOP. Mastered templates, STL containers, polymorphism, and algorithmic exams under strict constraints.</p>
           <div class="tech-tags">
             <span class="tag">C++98</span>
             <span class="tag">OOP</span>
@@ -515,8 +494,8 @@
         </div>
 
         <div class="project-card">
-          <h3>Minishell <span class="team-badge">Co-op [2]</span></h3>
-          <p>Constructed a custom Unix shell in C. Implemented a lexer/parser, environment variable expansion, pipes, redirections, and signal handling.</p>
+          <h3>Minishell <span class="team-badge">Team of 2</span></h3>
+          <p>Built a custom Unix shell in C. Implemented a lexer/parser, environment variables, pipes, redirections, and signal handling.</p>
           <div class="tech-tags">
             <span class="tag">C</span>
             <span class="tag">System Prog</span>
@@ -525,8 +504,8 @@
         </div>
 
         <div class="project-card">
-          <h3>Cub3D <span class="team-badge">Co-op [2]</span></h3>
-          <p>Forged a 2.5D graphical engine using raycasting mathematics. Managed raw window rendering, texture mapping, and collision detection.</p>
+          <h3>Cub3D <span class="team-badge">Team of 2</span></h3>
+          <p>Developed a 2.5D graphical engine using raycasting math. Managed window rendering, texture mapping, and basic collision detection.</p>
           <div class="tech-tags">
             <span class="tag">C</span>
             <span class="tag">Math</span>
@@ -536,7 +515,7 @@
 
         <div class="project-card">
           <h3>Philosophers</h3>
-          <p>Resolved the dining philosophers concurrency paradox in C. Handled multithreading and synchronized resources using mutexes to avoid deadlocks.</p>
+          <p>Solved the dining philosophers problem in C. Managed multithreading and synchronized resources using mutexes to prevent deadlocks.</p>
           <div class="tech-tags">
             <span class="tag">C</span>
             <span class="tag">Multithreading</span>
@@ -545,11 +524,11 @@
         </div>
 
         <div class="project-card">
-          <h3>System Core</h3>
-          <p>Built a robust foundation of core C libraries (Libft), an optimized bitwise sorting algorithm (push_swap), and inter-process pipelines (pipex).</p>
+          <h3>System Foundations</h3>
+          <p>Built a robust base of core C libraries (Libft), an optimized sorting algorithm (push_swap), and inter-process communication (pipex).</p>
           <div class="tech-tags">
             <span class="tag">C</span>
-            <span class="tag">Data Structs</span>
+            <span class="tag">Data Structures</span>
             <span class="tag">Unix Env</span>
           </div>
         </div>
@@ -559,12 +538,12 @@
 
     <section class="section">
       <div class="section-header">
-        <h2>Arsenal & Tooling</h2>
+        <h2>Technical Skills</h2>
         <div class="section-divider"></div>
       </div>
       <div class="skills-container">
         <div class="skill-category">
-          <h3>Primary Languages</h3>
+          <h3>Languages</h3>
           <div class="skills">
             <span class="skill">Go</span>
             <span class="skill">C / C++</span>
@@ -589,7 +568,7 @@
         </div>
         
         <div class="skill-category">
-          <h3>Infrastructure & Networks</h3>
+          <h3>Infrastructure & Tools</h3>
           <div class="skills">
             <span class="skill">Docker & Compose</span>
             <span class="skill">Linux</span>
@@ -604,7 +583,7 @@
 
     <section class="section">
       <div class="contact">
-        <a href="mailto:evgenyaniv8@gmail.com">Initiate Contact</a>
+        <a href="mailto:evgenyaniv8@gmail.com">Email Me</a>
         <a href="https://linkedin.com/in/yevhenyaniv" target="_blank" class="secondary">LinkedIn</a>
         <a href="https://github.com/pavshiyqqe" target="_blank" class="secondary">GitHub</a>
       </div>
@@ -612,7 +591,7 @@
   </div>
 
   <footer>
-    <p>File #42-YY // Year 2026 // Location: Paris, FR</p>
+    <p>&copy; 2026 Yevhen Yaniv "pavshiy" | Paris, France</p>
   </footer>
 </body>
 </html>
