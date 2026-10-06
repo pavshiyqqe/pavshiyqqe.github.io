@@ -75,7 +75,7 @@
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 1200px; /* Трохи розширено для сітки з 3 колонок */
       margin: 0 auto;
       padding: 3rem 2rem;
     }
@@ -84,7 +84,6 @@
       margin-bottom: 4rem;
     }
     
-    /* Новий стиль заголовків секцій для проєктів */
     .section-header {
       display: flex;
       align-items: center;
@@ -108,7 +107,6 @@
       border-radius: 2px;
     }
 
-    /* Старий стиль для звичайних секцій */
     .section > h2:not(.section-header h2) {
       font-size: 1.8rem;
       margin-bottom: 1.5rem;
@@ -126,10 +124,18 @@
       max-width: 900px;
     }
 
+    /* Стандартна сітка (для персональних проєктів: 2 в ряд) */
     .projects {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
       gap: 1.5rem;
+    }
+
+    /* Компактна сітка (для освітніх проєктів: 3 в ряд) */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
     }
 
     .project-card {
@@ -141,6 +147,26 @@
       backdrop-filter: blur(5px);
       display: flex;
       flex-direction: column;
+    }
+
+    /* Стилізація компактних карток в edu-grid */
+    .edu-grid .project-card {
+      padding: 1.4rem;
+    }
+    
+    .edu-grid .project-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.6rem;
+    }
+    
+    .edu-grid .project-card p {
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+    
+    .edu-grid .tag {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
     }
 
     .project-card:hover {
@@ -160,7 +186,6 @@
       gap: 1rem;
     }
     
-    /* Стильний тег команди */
     .team-badge {
       background: rgba(255, 170, 0, 0.12);
       border: 1px solid rgba(255, 170, 0, 0.4);
@@ -171,7 +196,7 @@
       font-weight: 700;
       letter-spacing: 0.5px;
       text-transform: uppercase;
-      margin-left: auto; /* Відштовхує тег максимально вправо */
+      margin-left: auto;
       box-shadow: 0 0 10px rgba(255, 170, 0, 0.05);
     }
 
@@ -267,13 +292,14 @@
       background: rgba(255,255,255,0.1);
     }
 
+    @media (max-width: 1024px) {
+      .edu-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
     @media (max-width: 768px) {
-      .projects {
-        grid-template-columns: 1fr;
-      }
-      header h1 {
-        font-size: 2.2rem;
-      }
+      .projects { grid-template-columns: 1fr; }
+      .edu-grid { grid-template-columns: 1fr; }
+      header h1 { font-size: 2.2rem; }
     }
 
     footer {
@@ -319,9 +345,9 @@
           <p>An automated AI assistant that ingests PDF/TXT documents, chunks content, generates vector embeddings, and leverages a Retrieval-Augmented Generation (RAG) pipeline to accurately answer user queries based on the provided context.</p>
           <div class="tech-tags">
             <span class="tag">Python</span>
-            <span class="tag">Groq LLM API</span>
+            <span class="tag">Groq LLM</span>
             <span class="tag">Telegram API</span>
-            <span class="tag">Vector Embeddings</span>
+            <span class="tag">Embeddings</span>
           </div>
         </div>
         
@@ -331,52 +357,113 @@
           <div class="tech-tags">
             <span class="tag">Lua</span>
             <span class="tag">Game Modding</span>
-            <span class="tag">Steam Workshop API</span>
+            <span class="tag">Steam API</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- EDUCATIONAL PROJECTS -->
+    <!-- EDUCATIONAL PROJECTS (3 in a row grid) -->
     <section class="section">
       <div class="section-header">
-        <h2>Educational Projects</h2>
+        <h2>Educational Projects (Ecole 42)</h2>
         <div class="section-divider"></div>
       </div>
-      <div class="projects">
+      <div class="edu-grid">
+        
         <div class="project-card">
-          <h3>GameVault <span class="team-badge">4 Team</span></h3>
-          <p>A full-stack web platform featuring a server-authoritative real-time Pong engine. Handled concurrent user sessions, live state synchronization via WebSockets, persistent player stats, and secure JWT/bcrypt authentication flows. Completely containerized for robust deployment.</p>
+          <h3>GameVault <span class="team-badge">Team of 4</span></h3>
+          <p>Full-stack web platform with a real-time Pong engine. Handled concurrent sessions, WebSocket sync, and JWT/bcrypt authentication flows.</p>
           <div class="tech-tags">
             <span class="tag">Go / Gin</span>
             <span class="tag">React</span>
             <span class="tag">PostgreSQL</span>
-            <span class="tag">WebSockets</span>
             <span class="tag">Docker</span>
           </div>
         </div>
 
         <div class="project-card">
-          <h3>ft_irc</h3>
-          <p>Engineered an HTTP/1.1 web server and an IRC server entirely from scratch in C++. Implemented non-blocking I/O multiplexing (select/poll) for efficient TCP/IP data streaming and concurrent client handling with strict protocol compliance.</p>
+          <h3>ft_irc & Webserv</h3>
+          <p>Engineered HTTP/1.1 and IRC servers from scratch in C++. Used non-blocking I/O (select/poll) for efficient TCP/IP multi-client handling.</p>
           <div class="tech-tags">
             <span class="tag">C++</span>
             <span class="tag">TCP/IP</span>
-            <span class="tag">Network Sockets</span>
+            <span class="tag">Sockets</span>
             <span class="tag">HTTP/1.1</span>
           </div>
         </div>
 
         <div class="project-card">
-          <h3>Inception & Born2beRoot</h3>
-          <p>Deployed a secure, multi-container service stack (Nginx, MariaDB) with isolated Docker networks. Hardened a Debian server by configuring UFW firewall rules, enforcing strict PAM password policies, and restricting SSH access.</p>
+          <h3>Inception</h3>
+          <p>Architected a multi-container Docker environment. Built custom Nginx, WordPress, and MariaDB images with isolated networking and volumes.</p>
           <div class="tech-tags">
             <span class="tag">Docker Compose</span>
-            <span class="tag">Linux Admin</span>
-            <span class="tag">Bash</span>
-            <span class="tag">Server Security</span>
+            <span class="tag">Nginx</span>
+            <span class="tag">MariaDB</span>
           </div>
         </div>
+
+        <div class="project-card">
+          <h3>Born2beRoot</h3>
+          <p>Hardened a Debian VM. Configured LVM partitioning, enforced strict PAM password policies, UFW firewall rules, and restricted SSH access.</p>
+          <div class="tech-tags">
+            <span class="tag">Linux</span>
+            <span class="tag">Bash Scripting</span>
+            <span class="tag">Security</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>C++ OOP Core & Exams</h3>
+          <p>Comprehensive deep dive into C++98 OOP (Modules 00-09). Mastered templates, STL containers, polymorphism, and algorithmic exams.</p>
+          <div class="tech-tags">
+            <span class="tag">C++98</span>
+            <span class="tag">OOP</span>
+            <span class="tag">STL</span>
+            <span class="tag">Algorithms</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>Minishell</h3>
+          <p>Built a custom Unix shell in C. Implemented a lexer/parser, environment variables, pipes, redirections, and signal handling.</p>
+          <div class="tech-tags">
+            <span class="tag">C</span>
+            <span class="tag">System Prog</span>
+            <span class="tag">Processes</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>Cub3D</h3>
+          <p>Developed a 2.5D graphical engine using raycasting math. Managed window rendering, texture mapping, and basic collision detection.</p>
+          <div class="tech-tags">
+            <span class="tag">C</span>
+            <span class="tag">Math</span>
+            <span class="tag">Graphics API</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>Philosophers</h3>
+          <p>Solved the dining philosophers problem in C. Managed multithreading and synchronized resources using mutexes to prevent deadlocks.</p>
+          <div class="tech-tags">
+            <span class="tag">C</span>
+            <span class="tag">Multithreading</span>
+            <span class="tag">Concurrency</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3>System Foundations</h3>
+          <p>Built a robust base of core C libraries (Libft), an optimized sorting algorithm (push_swap), and inter-process communication (pipex).</p>
+          <div class="tech-tags">
+            <span class="tag">C</span>
+            <span class="tag">Data Structures</span>
+            <span class="tag">Unix Env</span>
+          </div>
+        </div>
+
       </div>
     </section>
 
