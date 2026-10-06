@@ -34,9 +34,9 @@ I am a software engineering student specializing in backend development, cloud i
 *   Built a Telegram bot that ingests PDF/TXT files, chunks content, generates vector embeddings, and answers user questions based on retrieved context.
 *   **Tech:** Python, Telegram Bot API, Groq LLM API, pypdf, sentence-transformers.
 
-#### [ft_irc & Webserv](https://github.com/pavshiyqqe)
+#### [ft_irc](https://github.com/pavshiyqqe)
 *From-Scratch Network Servers*
-*   Engineered an HTTP/1.1 web server and an IRC server in C++ utilizing non-blocking I/O (`select`/`poll`) for concurrent client handling.
+*   Engineered an IRC server in C++ utilizing non-blocking I/O (`select`/`poll`) for concurrent client handling.
 *   **Tech:** C++, TCP/IP, Network Sockets.
 
 #### [Inception & Born2beRoot](https://github.com/pavshiyqqe)
